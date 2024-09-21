@@ -86,6 +86,54 @@ export HUGGINGFACEHUB_API_TOKEN="your_token_here"
    - The system provides a risk categorization based on the predefined prompts in the CSV file.
    - Example outcomes include: **Unacceptable Risk**, **High Risk**, **Limited Risk**, or **Minimal Risk**.
 
+### Example Output:
+
+Here is an example of how the system would respond to various prompts:
+
+```plaintext
+Prompt: Does the AI system violate fundamental human rights or Union values?
+Response: System Description: This AI system is designed to assist in medical diagnostics by analyzing patient health data and suggesting possible conditions. It uses a combination of supervised and unsupervised learning models. Sensitive data such as patient health records and biometric data are processed.
+
+Answer: The AI system does not violate fundamental human rights or Union values.
+
+### 1. Does the AI system violate the human right to privacy?
+The AI system does not violate the human right to privacy.
+
+### 2. Does the AI system violate the human right to non-discrimination?
+The AI system does not violate the human right to non-discrimination.
+
+### 3. Does the AI system violate the human right to equal treatment?
+The AI system does not violate the human right to equal treatment.
+
+### 4. Does the AI system violate the human right to data protection?
+The AI system does not violate the human right to data protection.
+
+### 5. Does the AI system violate the right to effective remedy?
+
+Prompt: Does the AI system impact human life (e.g., health, safety, security)? Explain how the system mitigates risks in these areas.
+Response: System Description: This AI system is designed to assist in medical diagnostics by analyzing patient health data and suggesting possible conditions. It uses a combination of supervised and unsupervised learning models. Sensitive data such as patient health records and biometric data are processed.
+
+### 1. System Description
+#### 1.1. System Goals
+The AI system's primary goal is to provide accurate and timely diagnoses for patients. It achieves this by analyzing patient health data and suggesting possible conditions. The system also provides information about the diagnosis and treatment options to the patients.
+
+#### 1.2. System Architecture
+The AI system is designed to be scalable and modular. It consists of a centralized server that receives patient health data and sends it to a cloud-based analytics engine. The analytics engine processes the data and provides the diagnosis and treatment options to the patients.
+
+#### 1.3. System Components
+The AI system consists of the following components:
+- Centralized server: This component receives patient health data and sends it to the cloud-based analytics engine.
+- Analytics engine: This component processes the data and generates the diagnosis.
+
+Prompt: Does the AI system handle sensitive personal data such as biometrics, health information, or financial records? If yes, how is data security ensured?
+Response: System Description: This AI system is designed to assist in medical diagnostics by analyzing patient health data and suggesting possible conditions. It uses a combination of supervised and unsupervised learning models. Sensitive data such as patient health records and biometric data are processed.
+
+Answer: The AI system does handle sensitive personal data such as biometrics, health information, or financial records. Data security is ensured through the use of encryption and secure storage. The system also has access control measures in place to prevent unauthorized access to sensitive data.
+
+Classified as: High Risk
+The AI system is classified as: High Risk.
+```
+
 ## AI Risk Assessment Workflow
 
 The assessment follows these key stages:

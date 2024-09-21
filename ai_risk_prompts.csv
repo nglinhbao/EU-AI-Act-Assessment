@@ -1,0 +1,11 @@
+Type,Prompt,Expected Answer Format
+Unacceptable Risk,Does the AI system violate fundamental human rights or Union values?,Yes/No + Details
+High Risk,"Does the AI system impact human life (e.g., health, safety, security)? Explain how the system mitigates risks in these areas.",Yes/No + Risk Mitigation Plan
+High Risk,"Does the AI system handle sensitive personal data such as biometrics, health information, or financial records? If yes, how is data security ensured?",Yes/No + Security Plan
+High Risk,"Does the AI system make irreversible decisions affecting individuals? If yes, explain the process for potential human intervention.",Yes/No + Details
+High Risk,Does the system carry out actions with potential for significant harm to individuals or society? Give examples of such actions.,Yes/No + Details
+Limited Risk,Is the AI system trained on a diverse dataset to avoid bias? Describe the efforts made to ensure diversity in training data.,Yes/No + Description of Dataset
+Limited Risk,Does the AI system have mechanisms to detect and correct bias in its predictions? Provide examples of such mechanisms.,Yes/No + Examples of Mechanisms
+Limited Risk,"Is the AI system explainable and transparent to users? If no, how is transparency achieved through other means?",Yes/No + Transparency Plan
+Minimal Risk,"Can users challenge or appeal decisions made by the AI system? If yes, describe the process for doing so.",Yes/No + Appeal Process
+Minimal Risk,Does the AI system inform users when they are interacting with an AI system instead of a human?,Yes/No + Disclosure Plan

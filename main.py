@@ -29,35 +29,23 @@ def query_llama(model, tokenizer, system_description, prompt):
     outputs = model.generate(**inputs, max_new_tokens=200)
     return tokenizer.decode(outputs[0], skip_special_tokens=True)
 
-# Perform classification by looping through initial and level-based assessment
-def perform_classification(model, tokenizer, system_description, initial_risk_prompts, level_based_prompts):
-    # Step 1: Initial Risk Assessment
-    for prompt in initial_risk_prompts:
+# Perform classification by reading the CSV from top to bottom
+def perform_classification(model, tokenizer, system_description, prompts_df):
+    # Loop through the CSV and check each prompt
+    for index, row in prompts_df.iterrows():
+        type = row['Type']
+        prompt = row['Prompt']
         print(f"Prompt: {prompt}")
         answer = query_llama(model, tokenizer, system_description, prompt)
         print(f"Response: {answer}")
+        
+        # If the response contains 'yes', return the current type (risk category)
         if "yes" in answer.lower():
-            return "Unacceptable Risk"
+            print(f"Classified as: {type}")
+            return type
     
-    # Step 2: Level-Based Risk Assessment
-    for prompt in level_based_prompts:
-        print(f"Prompt: {prompt}")
-        answer = query_llama(model, tokenizer, system_description, prompt)
-        print(f"Response: {answer}")
-
-    # If no unacceptable risk, return classification prompts
-    return "Continue to Risk Categorization"
-
-# Perform risk categorization
-def categorize_result(model, tokenizer, system_description, risk_categorization_prompts, ongoing_monitoring_prompts):
-    # Go through the categorization and ongoing prompts
-    final_results = {}
-    for prompt in risk_categorization_prompts + ongoing_monitoring_prompts:
-        print(f"Prompt: {prompt}")
-        answer = query_llama(model, tokenizer, system_description, prompt)
-        print(f"Response: {answer}")
-        final_results[prompt] = answer
-    return final_results
+    # If no 'yes' responses, return minimal risk by default
+    return "Minimal Risk"
 
 # Main function to handle AI system description and classification
 def main():
@@ -67,30 +55,18 @@ def main():
         return
     
     # Load prompts from CSV file
-    csv_file_path = './ai_system_risk_prompts.csv'  # Ensure this CSV exists with appropriate prompts
+    csv_file_path = './ai_risk_prompts.csv'  # Ensure this CSV exists with appropriate prompts
     prompts_df = pd.read_csv(csv_file_path)
     
-    # Define sections for classification
-    initial_risk_prompts = prompts_df[prompts_df['Step'] == 'Initial Risk Assessment']['Prompt'].tolist()
-    level_based_prompts = prompts_df[prompts_df['Step'] == 'Level-Based Risk Assessment']['Prompt'].tolist()
-    risk_categorization_prompts = prompts_df[prompts_df['Step'] == 'Risk Categorization']['Prompt'].tolist()
-    ongoing_monitoring_prompts = prompts_df[prompts_df['Step'] == 'Ongoing Monitoring']['Prompt'].tolist()
-
     # Load the model and tokenizer for LLaMA 2
     model_name = "meta-llama/Llama-2-7b-hf"
     tokenizer = LlamaTokenizer.from_pretrained(model_name)
     model = LlamaForCausalLM.from_pretrained(model_name, torch_dtype=torch.float16, device_map="auto")
     
-    # Perform classification
-    classification_status = perform_classification(model, tokenizer, system_description, initial_risk_prompts, level_based_prompts)
+    # Perform classification by processing the CSV row by row
+    classification_status = perform_classification(model, tokenizer, system_description, prompts_df)
 
-    if classification_status == "Unacceptable Risk":
-        print("The AI system is classified as Unacceptable Risk.")
-    else:
-        final_risk_results = categorize_result(model, tokenizer, system_description, risk_categorization_prompts, ongoing_monitoring_prompts)
-        print("Final Risk Results:")
-        for prompt, answer in final_risk_results.items():
-            print(f"{prompt}: {answer}")
+    print(f"The AI system is classified as: {classification_status}")
 
 # Run the main function
 if __name__ == "__main__":
