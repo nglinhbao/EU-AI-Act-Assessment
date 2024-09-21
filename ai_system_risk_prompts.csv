@@ -1,0 +1,19 @@
+Step,Prompt,Expected Answer Format
+Initial Risk Assessment,Does the AI system violate fundamental human rights or Union values? Provide examples of how these rights are protected if applicable.,Yes/No + Details
+Initial Risk Assessment,"Does the AI system make irreversible decisions affecting individuals? If yes, explain the process for potential human intervention.",Yes/No + Details
+Initial Risk Assessment,Does the system carry out actions with potential for significant harm to individuals or society? Give examples of such actions.,Yes/No + Details
+Initial Risk Assessment,"Is the AI system deployed in an area where failure could cause catastrophic consequences (e.g., healthcare, critical infrastructure)?",Yes/No + Details
+Level-Based Risk Assessment,"Does the AI system impact human life (e.g., health, safety, security)? Explain how the system mitigates risks in these areas.",Yes/No + Risk Mitigation Plan
+Level-Based Risk Assessment,Does the AI system operate autonomously with minimal or no human intervention? Describe the human oversight mechanisms in place.,Yes/No + Oversight Details
+Level-Based Risk Assessment,"Does the AI system handle sensitive personal data such as biometrics, health information, or financial records? If yes, how is data security ensured?",Yes/No + Security Plan
+Level-Based Risk Assessment,"Does the AI system comply with privacy regulations (e.g., GDPR, NSW PPIP Act)? Provide details of compliance measures.",Yes/No + Compliance Details
+Level-Based Risk Assessment,Is the AI system trained on a diverse dataset to avoid bias? Describe the efforts made to ensure diversity in training data.,Yes/No + Description of Dataset
+Level-Based Risk Assessment,Does the AI system have mechanisms to detect and correct bias in its predictions? Provide examples of such mechanisms.,Yes/No + Examples of Mechanisms
+Level-Based Risk Assessment,"Is the AI system explainable and transparent to users? If no, how is transparency achieved through other means?",Yes/No + Transparency Plan
+Level-Based Risk Assessment,"Can users challenge or appeal decisions made by the AI system? If yes, describe the process for doing so.",Yes/No + Appeal Process
+Level-Based Risk Assessment,Does the AI system inform users when they are interacting with an AI system instead of a human?,Yes/No + Disclosure Plan
+Risk Categorization,"Based on the previous assessments, is the AI system categorized as high, limited, or minimal risk?",High/Limited/Minimal + Details
+Risk Categorization,Does the AI system have provisions for human oversight? Explain the level of human control in decision-making.,Yes/No + Oversight Explanation
+Risk Categorization,"If categorized as high risk, what are the additional mitigation measures applied to reduce risk?",Yes/No + Mitigation Strategy
+Risk Categorization,Is there an ongoing monitoring process to ensure the AI system remains compliant with performance and fairness standards?,Yes/No + Monitoring Plan
+Ongoing Monitoring,Is there an oversight committee that will periodically review the AI system's performance and ethical compliance?,Yes/No + Oversight Committee Details
