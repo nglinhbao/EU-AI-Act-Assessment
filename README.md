@@ -59,6 +59,8 @@ export HUGGINGFACEHUB_API_TOKEN="your_token_here"
 
 ## Usage
 
+![Workflow](./workflow.png)
+
 1. **Run the Assessment Script:**
 
    To start the AI system classification process:
