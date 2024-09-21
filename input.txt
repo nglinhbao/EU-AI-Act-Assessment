@@ -1,0 +1,1 @@
+This AI system is designed to assist in medical diagnostics by analyzing patient health data and suggesting possible conditions. It uses a combination of supervised and unsupervised learning models. Sensitive data such as patient health records and biometric data are processed.
