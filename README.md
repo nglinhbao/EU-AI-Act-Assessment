@@ -1,4 +1,4 @@
-# AI EU Act Assessment
+# EU AI Act Assessment
 
 This project is designed to classify AI systems according to the **EU AI Act** using the **LLaMA 2 (7B)** model. The AI system is evaluated through several stages, including **Initial Risk Assessment**, **Level-Based Risk Assessment**, and **Risk Categorization**. The purpose is to ensure that AI systems comply with regulations and are categorized according to their risk levels.
 
@@ -58,8 +58,6 @@ export HUGGINGFACEHUB_API_TOKEN="your_token_here"
 ```
 
 ## Usage
-
-![Workflow](./workflow.png)
 
 ### Steps to Run the Assessment:
 
@@ -136,17 +134,24 @@ The AI system is classified as: High Risk.
 
 ## AI Risk Assessment Workflow
 
-The assessment follows these key stages:
+![Workflow](./workflow.png)
 
-1. **Initial Risk Assessment**: 
-   - The system checks for unacceptable risks, such as violations of human rights or significant societal impact.
-   - If any prompt receives a "Yes" answer, the system is classified as **Unacceptable Risk** and further assessment stops.
+The assessment follows these key stages, evaluated in sequence from top to bottom:
 
-2. **Level-Based Risk Assessment**: 
-   - If no unacceptable risks are found, the system moves to a more detailed evaluation based on its impact on human health, safety, security, and privacy.
+1. **Unacceptable Risk**:
+   - The system is first checked against prompts to identify if it violates fundamental human rights, Union values, or carries risks that are deemed unacceptable.
+   - If any prompt receives a "Yes" answer, the system is classified as **Unacceptable Risk**, and the assessment halts. No further evaluation is carried out.
 
-3. **Risk Categorization**: 
-   - The system is classified as either **High Risk**, **Limited Risk**, or **Minimal Risk** based on the results of the previous assessments.
+2. **High Risk**:
+   - If the system passes the Unacceptable Risk stage, it is checked for **High Risk** factors. This includes assessing whether the system impacts human life, handles sensitive personal data, or makes autonomous decisions without human intervention.
+   - If any prompt in this stage receives a "Yes" answer, the system is classified as **High Risk**.
 
-4. **Ongoing Monitoring**: 
-   - Additional monitoring prompts ensure that the system remains compliant with ethical and performance standards over time.
+3. **Limited Risk**:
+   - If the system does not qualify for **High Risk**, it is evaluated for **Limited Risk**. Prompts in this stage assess bias detection, transparency, and fairness in the system.
+   - If any prompt receives a "Yes" answer, the system is classified as **Limited Risk**.
+
+4. **Minimal Risk**:
+   - If none of the previous stages result in a classification, the system is classified as **Minimal Risk**. This means the system poses minimal risks in terms of data handling, bias, and overall impact on users and society.
+
+5. **Ongoing Monitoring**:
+   - Regardless of the initial classification, ongoing monitoring prompts help ensure the system remains compliant with performance, ethical, and fairness standards over time. This stage includes provisions for continued oversight and assessment to catch potential issues post-deployment.
