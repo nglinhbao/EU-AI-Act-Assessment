@@ -1,6 +1,6 @@
 # AI EU Act Assessment
 
-This project is designed to classify AI systems according to the EU AI Act using a LLaMA 2 (7B) model. The AI system is evaluated through several stages, including **Initial Risk Assessment**, **Level-Based Risk Assessment**, and **Risk Categorization**. The purpose is to ensure that AI systems comply with regulations and are categorized according to their risk levels.
+This project is designed to classify AI systems according to the **EU AI Act** using the **LLaMA 2 (7B)** model. The AI system is evaluated through several stages, including **Initial Risk Assessment**, **Level-Based Risk Assessment**, and **Risk Categorization**. The purpose is to ensure that AI systems comply with regulations and are categorized according to their risk levels.
 
 ## Table of Contents
 - [Project Description](#project-description)
@@ -11,22 +11,22 @@ This project is designed to classify AI systems according to the EU AI Act using
 
 ## Project Description
 
-This project evaluates AI systems to assess their compliance with the **EU AI Act**. The system follows a tree-based workflow, beginning with an **Initial Risk Assessment**. Depending on the results, it moves to **Level-Based Risk Assessment** or determines whether the AI system poses an **Unacceptable Risk**. The core components of the system include prompts designed for different phases of risk assessment and a fine-tuned LLaMA 2 model for generating responses.
+This project evaluates AI systems to assess their compliance with the **EU AI Act**. The system follows a tree-based workflow, beginning with an **Initial Risk Assessment**. Based on the outcomes, it moves to **Level-Based Risk Assessment** or determines whether the AI system poses an **Unacceptable Risk**. The core components of the system include structured prompts designed for different phases of risk assessment and a fine-tuned **LLaMA 2** model to generate responses.
 
 ## Features
-- **AI Risk Categorization** based on EU AI Act principles.
-- **LLaMA 2 (7B)** model integration for assessing and classifying risks.
-- **Automated Workflow** for multi-step evaluation: Unacceptable risk detection, high-risk systems, and low-risk systems.
-- **CSV-driven prompt system** for systematic AI assessment.
+- **AI Risk Categorization** based on **EU AI Act** principles.
+- **LLaMA 2 (7B)** model integration for automated risk assessments.
+- **CSV-driven prompt system** for systematic AI evaluation.
+- **Multi-step automated workflow**: Initial risk, level-based assessment, and ongoing monitoring.
 
 ## Installation
 
 ### Prerequisites
 
 Ensure you have the following installed:
-- Python 3.8+
-- Conda environment (optional but recommended)
-- Hugging Face Token (required to access the LLaMA 2 model)
+- Python 3.8+.
+- Conda environment (optional but recommended).
+- Hugging Face API Token (required to access the LLaMA 2 model).
 
 ### Clone the Repository
 ```bash
@@ -52,7 +52,7 @@ Ensure you have a Hugging Face token to access the LLaMA 2 model.
 huggingface-cli login
 ```
 
-Or set the token directly:
+Alternatively, you can export the token directly in your environment:
 ```bash
 export HUGGINGFACEHUB_API_TOKEN="your_token_here"
 ```
@@ -61,33 +61,44 @@ export HUGGINGFACEHUB_API_TOKEN="your_token_here"
 
 ![Workflow](./workflow.png)
 
-1. **Run the Assessment Script:**
+### Steps to Run the Assessment:
 
-   To start the AI system classification process:
+1. **Prepare the AI System Description**:
+   - Create a `.txt` file containing the description of the AI system that you wish to assess.
+   - Example:
+     ```txt
+     This AI system assists in medical diagnostics by analyzing patient health data. It processes sensitive health records and suggests possible conditions based on the data.
+     ```
+
+2. **Run the Assessment Script**:
+
+   To start the AI system classification process, make sure you have the system description `.txt` file ready, and execute the following command:
+
    ```bash
    python3 main.py
    ```
 
-2. **Prompt System:**
-   The system reads prompts from a CSV file (`ai_system_risk_prompts.csv`) and evaluates the AI system through different stages. If an AI system is deemed to pose an unacceptable risk, the process halts and returns the result. Otherwise, it proceeds through all stages to classify the system as high, limited, or minimal risk.
+3. **Prompts and AI System Evaluation**:
+   - The system reads prompts from the `CSV` file (`ai_system_risk_prompts.csv`) and evaluates the AI system based on its description. 
+   - If the AI system poses an **Unacceptable Risk**, the process halts and returns the result. Otherwise, it proceeds through all stages to classify the system as **High Risk**, **Limited Risk**, or **Minimal Risk**.
 
-3. **Input and Output:**
-   - The system evaluates inputs based on predefined prompts in the CSV file and generates a response for each stage using the LLaMA 2 model.
-   - The output is the risk categorization of the AI system (e.g., **Unacceptable Risk**, **High Risk**, **Limited Risk**, or **Minimal Risk**).
+4. **Output**:
+   - The system provides a risk categorization based on the predefined prompts in the CSV file.
+   - Example outcomes include: **Unacceptable Risk**, **High Risk**, **Limited Risk**, or **Minimal Risk**.
 
 ## AI Risk Assessment Workflow
 
 The assessment follows these key stages:
 
 1. **Initial Risk Assessment**: 
-   - The system checks for unacceptable risks like violations of human rights or major impacts on society.
-   - If any prompt returns "Yes," the system categorizes the AI as **Unacceptable Risk** and halts further assessment.
+   - The system checks for unacceptable risks, such as violations of human rights or significant societal impact.
+   - If any prompt receives a "Yes" answer, the system is classified as **Unacceptable Risk** and further assessment stops.
 
 2. **Level-Based Risk Assessment**: 
-   - If the system passes the initial assessment, it moves to a more detailed evaluation of the AI's impact on health, safety, and data privacy.
-   
+   - If no unacceptable risks are found, the system moves to a more detailed evaluation based on its impact on human health, safety, security, and privacy.
+
 3. **Risk Categorization**: 
-   - The final stage assigns a risk level based on previous assessments, categorizing the AI system as **High Risk**, **Limited Risk**, or **Minimal Risk**.
+   - The system is classified as either **High Risk**, **Limited Risk**, or **Minimal Risk** based on the results of the previous assessments.
 
 4. **Ongoing Monitoring**: 
-   - Additional prompts for continuous risk monitoring and ethical compliance
+   - Additional monitoring prompts ensure that the system remains compliant with ethical and performance standards over time.
