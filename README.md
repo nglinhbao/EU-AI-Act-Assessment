@@ -93,6 +93,8 @@ Accuracy: 0.30
 
 ## AI Risk Assessment Workflow with Scoring System
 
+![Workflow](./workflow.png)
+
 The assessment follows these key stages, evaluated sequentially from top to bottom. Each prompt at every risk level is scored on a scale of **1 to 5**, where:
 - **1** means the system absolutely does not meet the criteria,
 - **5** means the system absolutely meets the criteria.
