@@ -62,22 +62,19 @@ export HUGGINGFACEHUB_API_TOKEN="your_token_here"
 ### Steps to Run the Assessment:
 
 1. **Prepare the AI System Description**:
-   - Create a `.txt` file containing the description of the AI system that you wish to assess.
-   - Example:
-     ```txt
-     This AI system assists in medical diagnostics by analyzing patient health data. It processes sensitive health records and suggests possible conditions based on the data.
-     ```
+   - Create a `.csv` file containing the description of the AI systems that you wish to assess.
+   - [Example](./sample.csv)
 
 2. **Run the Assessment Script**:
 
-   To start the AI system classification process, make sure you have the system description `.txt` file ready, and execute the following command:
+   To start the AI system classification process, make sure you have the system description `.csv` file ready, and execute the following command:
 
    ```bash
    python3 main.py
    ```
 
 3. **Prompts and AI System Evaluation**:
-   - The system reads prompts from the `CSV` file (`ai_system_risk_prompts.csv`) and evaluates the AI system based on its description. 
+   - The system reads prompts from the `CSV` file (`ai_risk_prompts.csv`) and evaluates the AI system based on its description. 
    - If the AI system poses an **Unacceptable Risk**, the process halts and returns the result. Otherwise, it proceeds through all stages to classify the system as **High Risk**, **Limited Risk**, or **Minimal Risk**.
 
 4. **Output**:
@@ -89,69 +86,58 @@ export HUGGINGFACEHUB_API_TOKEN="your_token_here"
 Here is an example of how the system would respond to various prompts:
 
 ```plaintext
-Prompt: Does the AI system violate fundamental human rights or Union values?
-Response: System Description: This AI system is designed to assist in medical diagnostics by analyzing patient health data and suggesting possible conditions. It uses a combination of supervised and unsupervised learning models. Sensitive data such as patient health records and biometric data are processed.
-
-Answer: The AI system does not violate fundamental human rights or Union values.
-
-### 1. Does the AI system violate the human right to privacy?
-The AI system does not violate the human right to privacy.
-
-### 2. Does the AI system violate the human right to non-discrimination?
-The AI system does not violate the human right to non-discrimination.
-
-### 3. Does the AI system violate the human right to equal treatment?
-The AI system does not violate the human right to equal treatment.
-
-### 4. Does the AI system violate the human right to data protection?
-The AI system does not violate the human right to data protection.
-
-### 5. Does the AI system violate the right to effective remedy?
-
-Prompt: Does the AI system impact human life (e.g., health, safety, security)? Explain how the system mitigates risks in these areas.
-Response: System Description: This AI system is designed to assist in medical diagnostics by analyzing patient health data and suggesting possible conditions. It uses a combination of supervised and unsupervised learning models. Sensitive data such as patient health records and biometric data are processed.
-
-### 1. System Description
-#### 1.1. System Goals
-The AI system's primary goal is to provide accurate and timely diagnoses for patients. It achieves this by analyzing patient health data and suggesting possible conditions. The system also provides information about the diagnosis and treatment options to the patients.
-
-#### 1.2. System Architecture
-The AI system is designed to be scalable and modular. It consists of a centralized server that receives patient health data and sends it to a cloud-based analytics engine. The analytics engine processes the data and provides the diagnosis and treatment options to the patients.
-
-#### 1.3. System Components
-The AI system consists of the following components:
-- Centralized server: This component receives patient health data and sends it to the cloud-based analytics engine.
-- Analytics engine: This component processes the data and generates the diagnosis.
-
-Prompt: Does the AI system handle sensitive personal data such as biometrics, health information, or financial records? If yes, how is data security ensured?
-Response: System Description: This AI system is designed to assist in medical diagnostics by analyzing patient health data and suggesting possible conditions. It uses a combination of supervised and unsupervised learning models. Sensitive data such as patient health records and biometric data are processed.
-
-Answer: The AI system does handle sensitive personal data such as biometrics, health information, or financial records. Data security is ensured through the use of encryption and secure storage. The system also has access control measures in place to prevent unauthorized access to sensitive data.
-
-Classified as: High Risk
-The AI system is classified as: High Risk.
+(AI-Act) User:~/EU-AI-Act$ python3 main.py                                                                                                                                                                             
+Loading checkpoint shards: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2/2 [00:02<00:00,  1.50s/it]
+Accuracy: 0.30
 ```
 
-## AI Risk Assessment Workflow
+## AI Risk Assessment Workflow with Scoring System
 
-![Workflow](./workflow.png)
+The assessment follows these key stages, evaluated sequentially from top to bottom. Each prompt at every risk level is scored on a scale of **1 to 5**, where:
+- **1** means the system absolutely does not meet the criteria,
+- **5** means the system absolutely meets the criteria.
 
-The assessment follows these key stages, evaluated in sequence from top to bottom:
+For each stage, if the **mean score** is greater than **3**, the system will be classified under that risk category.
 
-1. **Unacceptable Risk**:
-   - The system is first checked against prompts to identify if it violates fundamental human rights, Union values, or carries risks that are deemed unacceptable.
-   - If any prompt receives a "Yes" answer, the system is classified as **Unacceptable Risk**, and the assessment halts. No further evaluation is carried out.
+### 1. **Unacceptable Risk**:
+   - The system is first evaluated against prompts to identify if it violates fundamental human rights, Union values, or carries unacceptable risks.
+   - Each prompt at this stage receives a score from **1 to 5**.
+   - If the **mean score** of all prompts in this stage is greater than **3**, the system is classified as **Unacceptable Risk**, and the assessment halts. No further evaluation is carried out.
 
-2. **High Risk**:
-   - If the system passes the Unacceptable Risk stage, it is checked for **High Risk** factors. This includes assessing whether the system impacts human life, handles sensitive personal data, or makes autonomous decisions without human intervention.
-   - If any prompt in this stage receives a "Yes" answer, the system is classified as **High Risk**.
+### 2. **High Risk**:
+   - If the system passes the **Unacceptable Risk** stage, it is assessed for **High Risk** factors such as:
+     - Impact on human life,
+     - Handling of sensitive personal data,
+     - Autonomous decision-making without human oversight.
+   - Each prompt in this stage is scored from **1 to 5**.
+   - If the **mean score** for the prompts in this stage is greater than **3**, the system is classified as **High Risk**, and further evaluation stops.
 
-3. **Limited Risk**:
-   - If the system does not qualify for **High Risk**, it is evaluated for **Limited Risk**. Prompts in this stage assess bias detection, transparency, and fairness in the system.
-   - If any prompt receives a "Yes" answer, the system is classified as **Limited Risk**.
+### 3. **Limited Risk**:
+   - If the system does not qualify as **High Risk**, it is evaluated for **Limited Risk** factors like:
+     - Bias detection mechanisms,
+     - System transparency,
+     - Fairness in decision-making processes.
+   - Each prompt in this stage is scored from **1 to 5**.
+   - If the **mean score** is greater than **3**, the system is classified as **Limited Risk**.
 
-4. **Minimal Risk**:
-   - If none of the previous stages result in a classification, the system is classified as **Minimal Risk**. This means the system poses minimal risks in terms of data handling, bias, and overall impact on users and society.
+### 4. **Minimal Risk**:
+   - If none of the previous stages result in a classification, the system is evaluated for **Minimal Risk**, including:
+     - Proper handling of non-sensitive data,
+     - Minimal impact on users and society,
+     - Low potential for bias or unfair treatment.
+   - Each prompt in this stage is scored from **1 to 5**.
+   - If the **mean score** is greater than **3**, the system is classified as **Minimal Risk**.
 
-5. **Ongoing Monitoring**:
-   - Regardless of the initial classification, ongoing monitoring prompts help ensure the system remains compliant with performance, ethical, and fairness standards over time. This stage includes provisions for continued oversight and assessment to catch potential issues post-deployment.
+---
+
+### Example Workflow (Scoring):
+
+1. **Unacceptable Risk Prompts**: Scores [5, 4, 2, 3]. 
+   - Mean score = (5 + 4 + 2 + 3) / 4 = 3.5 → **Unacceptable Risk**.
+   - Classification stops.
+
+2. **High Risk Prompts**: Scores [2, 3, 4, 4]. 
+   - Mean score = (2 + 3 + 4 + 4) / 4 = 3.25 → **High Risk**.
+   
+3. **Limited Risk Prompts**: Scores [2, 2, 3]. 
+   - Mean score = (2 + 2 + 3) / 3 = 2.33 → Not classified as Limited Risk.

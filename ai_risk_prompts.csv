@@ -1,11 +1,12 @@
-Type,Prompt,Expected Answer Format
-Unacceptable Risk,Does the AI system violate fundamental human rights or Union values?,Yes/No + Details
-High Risk,"Does the AI system impact human life (e.g., health, safety, security)? Explain how the system mitigates risks in these areas.",Yes/No + Risk Mitigation Plan
-High Risk,"Does the AI system handle sensitive personal data such as biometrics, health information, or financial records? If yes, how is data security ensured?",Yes/No + Security Plan
-High Risk,"Does the AI system make irreversible decisions affecting individuals? If yes, explain the process for potential human intervention.",Yes/No + Details
-High Risk,Does the system carry out actions with potential for significant harm to individuals or society? Give examples of such actions.,Yes/No + Details
-Limited Risk,Is the AI system trained on a diverse dataset to avoid bias? Describe the efforts made to ensure diversity in training data.,Yes/No + Description of Dataset
-Limited Risk,Does the AI system have mechanisms to detect and correct bias in its predictions? Provide examples of such mechanisms.,Yes/No + Examples of Mechanisms
-Limited Risk,"Is the AI system explainable and transparent to users? If no, how is transparency achieved through other means?",Yes/No + Transparency Plan
-Minimal Risk,"Can users challenge or appeal decisions made by the AI system? If yes, describe the process for doing so.",Yes/No + Appeal Process
-Minimal Risk,Does the AI system inform users when they are interacting with an AI system instead of a human?,Yes/No + Disclosure Plan
+Type,Prompt
+Unacceptable Risk,"Does this AI system exploit vulnerable individuals, such as children or elderly people?"
+Unacceptable Risk,Does this AI system engage in behavioral manipulation or influence user decisions unfairly?
+Unacceptable Risk,Is this AI system used for real-time biometric identification for law enforcement purposes?
+Unacceptable Risk,Is this AI system involved in social scoring or ranking individuals based on their personal data?
+High Risk,Does this AI system analyze job applications or assist in recruitment decisions?
+High Risk,"Does this AI system evaluate eligibility for public benefits, credit, or insurance?"
+High Risk,"Does this AI system evaluate product safety in critical industries (e.g., automotive, healthcare)?"
+Limited Risk,"Does this AI system interact directly with consumers, such as providing customer support?"
+Limited Risk,"Does this AI system generate or manipulate digital content (e.g., images, audio, video)?"
+Minimal Risk,"Is this AI system used for entertainment purposes, such as AI-enabled video games?"
+Minimal Risk,Is this AI system used for filtering spam or other similar non-critical tasks?
