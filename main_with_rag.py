@@ -1,89 +1,105 @@
 import pandas as pd
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
-from langchain.embeddings import HuggingFaceEmbeddings
-from langchain.vectorstores import Chroma
+from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_community.vectorstores import FAISS
 import os
 
 def get_system_description(txt_file_path):
+    print(f"[DEBUG] Attempting to read system description from: {txt_file_path}")
     if not os.path.isfile(txt_file_path):
-        print("File not found. Please provide a valid .txt file path.")
+        print("[DEBUG] File not found. Please provide a valid .txt file path.")
         return None
 
     try:
         with open(txt_file_path, 'r') as file:
             system_description = file.read()
+        print("[DEBUG] Successfully read system description")
         return system_description
     except Exception as e:
-        print(f"Error reading the .txt file: {e}")
+        print(f"[DEBUG] Error reading the .txt file: {e}")
         return None
 
 def retrive_information_from_csv(file_name):
+    print(f"[DEBUG] Attempting to read CSV file: {file_name}")
     try:
         df = pd.read_csv(file_name)
+        print(f"[DEBUG] Successfully loaded CSV with {len(df)} rows")
         return df
     except Exception as e:
-        print(f"Error reading the CSV file: {e}")
+        print(f"[DEBUG] Error reading the CSV file: {e}")
         return None
 
-def get_prompts_from_db(system_description: str, db_paths: dict, embeddings, k: int = 3):
+def get_vector_db(risk_type, db_dir='./vector_db'):
     """
-    Retrieve relevant prompts from vector databases for each risk type.
-    
-    Args:
-        system_description (str): Description of the system to classify
-        db_paths (dict): Dictionary mapping risk types to database paths
-        embeddings: HuggingFace embeddings instance
-        k (int): Number of prompts to retrieve per risk type
-    
-    Returns:
-        list: List of tuples containing (risk_type, prompt)
+    Load the vector database for a specific risk type with safe deserialization.
     """
-    prompts = []
+    print(f"\n[DEBUG] Loading vector DB for risk type: {risk_type}")
+    embeddings = HuggingFaceEmbeddings(
+        model_name="sentence-transformers/all-mpnet-base-v2",
+        model_kwargs={'device': 'cpu'}
+    )
     
-    for risk_type, db_path in db_paths.items():
-        # Load the vector database for this risk type
-        db = Chroma(
-            persist_directory=db_path,
-            embedding_function=embeddings
-        )
-        
-        # Get similar documents
+    safe_name = risk_type.lower().replace(' ', '_')
+    db_path = os.path.join(db_dir, safe_name)
+    print(f"[DEBUG] Looking for vector DB at path: {db_path}")
+    
+    if not os.path.exists(db_path):
+        print(f"[DEBUG] Vector DB not found at: {db_path}")
+        raise ValueError(f"No vector database found for {risk_type}")
+    
+    print(f"[DEBUG] Successfully loaded vector DB for: {risk_type}")
+    return FAISS.load_local(db_path, embeddings, allow_dangerous_deserialization=True)
+
+def get_relevant_prompts(system_description, risk_type, k=3):
+    """
+    Retrieve k most relevant prompts from the vector database for a given risk type.
+    """
+    print(f"\n[DEBUG] Getting {k} relevant prompts for risk type: {risk_type}")
+    try:
+        db = get_vector_db(risk_type)
+        print(f"[DEBUG] Performing similarity search for {risk_type}")
         results = db.similarity_search_with_score(system_description, k=k)
-        
-        # Extract prompts and add to list with risk type
-        for doc, score in results:
-            prompts.append({
-                'Type': risk_type,
-                'Prompt': doc.page_content  # Assuming prompt is stored in page_content
-            })
-    
-    # Convert to DataFrame to maintain compatibility with existing code
-    return pd.DataFrame(prompts)
+        prompts = [doc.page_content for doc, score in results]
+        print(f"[DEBUG] Retrieved {len(prompts)} prompts for {risk_type}")
+        for i, (doc, score) in enumerate(results):
+            print(f"[DEBUG] Prompt {i+1} similarity score: {score}")
+        return prompts
+    except Exception as e:
+        print(f"[DEBUG] Error retrieving prompts for {risk_type}: {e}")
+        return []
 
 def query_llama(model, tokenizer, system_description, prompt):
+    print("\n[DEBUG] Querying LLaMA model")
     device = "cuda" if torch.cuda.is_available() else "cpu"
-    # Combine the system description and the prompt for classification
+    print(f"[DEBUG] Using device: {device}")
+    
     combined_input = f"System Description: {system_description}\n\nPrompt: {prompt}\n\nAnswer: "
+    print("[DEBUG] Tokenizing input")
     inputs = tokenizer(combined_input, return_tensors="pt").to(device)
+    
+    print("[DEBUG] Generating response")
     outputs = model.generate(**inputs, max_new_tokens=1)
     response = tokenizer.decode(outputs[0], skip_special_tokens=True)
+    print(f"[DEBUG] Raw model response: {response}")
 
-    # Post-process the response to extract the number
     answer = response.split("Answer: ")[-1].strip()
+    print(f"[DEBUG] Extracted answer: {answer}")
     
-    # Ensure the answer is a digit between 1 and 5
     if answer.isdigit() and 1 <= int(answer) <= 5:
+        print(f"[DEBUG] Valid numerical response: {answer}")
         return int(answer)
     else:
+        print("[DEBUG] Invalid response, defaulting to 3")
         return 3
 
-def perform_classification(row, model, tokenizer, vector_db_prompts, viz=True):
-    # Create a more detailed input description using multiple columns
+def perform_classification(row, model, tokenizer, viz=True):
+    print("\n[DEBUG] Starting classification for new row")
+    # Create detailed input description
     input_description = f"{row['AI System Description']}. It uses {row['Input Data Type']}. The system functions include: {row['System Functions']}. Benefits of Commercial Use: {row['Benefits of Commercial Use']}. Assumptions/Consents Regarding Data Usage: {row['Assumptions/Consents Regarding Data Usage']}"
+    print("[DEBUG] Created input description")
     
-    # Base prompt template
-    prompt = """
+    base_prompt = """
     Based on the description, assess the system on a scale of 1-5 based on a given question. 1 means absolutely no, and 5 means absolutely yes. 
 
     Here are some examples:
@@ -98,82 +114,71 @@ def perform_classification(row, model, tokenizer, vector_db_prompts, viz=True):
     Answer: 5
 
     Now, based on the description provided, answer the following question (Only return a single number for the result. Do not leave answers blank):
-    """    
-    current_level = "High Risk"
-    current_value = 0
-    current_count = 0
+    """
+
+    risk_types = ["Unacceptable Risk", "High Risk", "Limited Risk", "Minimal Risk"]
+    print(f"[DEBUG] Evaluating risk types in order: {risk_types}")
     
-    for _, prompt_row in vector_db_prompts.iterrows():
-        type = prompt_row['Type']
-        prompt_question = prompt + prompt_row['Prompt']
-        answer = query_llama(model, tokenizer, input_description, prompt_question)
-        if viz:
-            print(f"Response: {answer}")
-
-        level = answer
-
-        if current_level != type:
-            if current_count > 0:
-                result = float(current_value / current_count)
-                if result > 3:
-                    return current_level
-            if type == "Minimal Risk":
-                break
-            current_level = type
-            current_value = level
-            current_count = 1
-        else:
-            current_value += level
-            current_count += 1
-
+    for risk_type in risk_types:
+        print(f"\n[DEBUG] Evaluating risk type: {risk_type}")
+        prompts = get_relevant_prompts(input_description, risk_type, k=3)
+        
+        if not prompts:
+            print(f"[DEBUG] No prompts found for {risk_type}, skipping")
+            continue
+            
+        level_sum = 0
+        prompt_count = 0
+        
+        for prompt_text in prompts:
+            full_prompt = base_prompt + prompt_text
+            print(f"\n[DEBUG] Processing prompt {prompt_count + 1} for {risk_type}")
+            answer = query_llama(model, tokenizer, input_description, full_prompt)
+            if viz:
+                print(f"Risk Type: {risk_type}")
+                print(f"Prompt: {prompt_text}")
+                print(f"Response: {answer}\n")
+                
+            level_sum += answer
+            prompt_count += 1
+        
+        if prompt_count > 0:
+            average_level = level_sum / prompt_count
+            print(f"[DEBUG] Average level for {risk_type}: {average_level}")
+            if average_level > 3:
+                print(f"[DEBUG] Classification decision: {risk_type} (avg_level > 3)")
+                return risk_type
+            
+        if risk_type == "Minimal Risk":
+            print("[DEBUG] Reached Minimal Risk evaluation, breaking loop")
+            break
+    
+    print("[DEBUG] No higher risk levels met criteria, returning Minimal Risk")
     return "Minimal Risk"
 
 def main():
+    print("[DEBUG] Starting main function")
+    csv_file_path = './ai_risk_prompts.csv'
     model_name = "meta-llama/Llama-2-7b-hf"
 
-    # Initialize tokenizer and model
+    print(f"[DEBUG] Loading model and tokenizer: {model_name}")
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     model = AutoModelForCausalLM.from_pretrained(model_name, torch_dtype=torch.float16, device_map="auto")
+    print("[DEBUG] Model and tokenizer loaded successfully")
     
-    # Initialize embeddings for vector DB
-    model_kwargs = {'device': 'cuda' if torch.cuda.is_available() else 'cpu'}
-    embeddings = HuggingFaceEmbeddings(
-        model_name=model_name,
-        model_kwargs=model_kwargs,
-        encode_kwargs={'normalize_embeddings': True}
-    )
-    
-    # Define paths to vector databases for each risk type
-    db_paths = {
-        "Unacceptable Risk": "./data/unacceptable_risk_db",
-        "High Risk": "./data/high_risk_db",
-        "Limited Risk": "./data/limited_risk_db",
-        "Minimal Risk": "./data/minimal_risk_db"
-    }
-    
-    # Load the dataset to classify
     synthetic_dataset = './sample.csv'
     df = retrive_information_from_csv(synthetic_dataset)
     
-    if df is not None:
-        # Process each row
-        for index, row in df.iterrows():
-            # Get system description for vector DB query
-            system_desc = (f"{row['AI System Description']} {row['Input Data Type']} "
-                         f"{row['System Functions']} {row['Benefits of Commercial Use']} "
-                         f"{row['Assumptions/Consents Regarding Data Usage']}")
-            
-            # Get relevant prompts from vector DB
-            vector_db_prompts = get_prompts_from_db(system_desc, db_paths, embeddings)
-            
-            # Perform classification using retrieved prompts
-            result = perform_classification(row, model, tokenizer, vector_db_prompts)
-            df.at[index, 'Result'] = result
-        
-        # Compute accuracy
-        num_tp = (df['Result'] == df['System Type']).sum()
-        accuracy = num_tp / len(df)
-        print(f"Accuracy: {accuracy:.2f}")
+    print("\n[DEBUG] Starting classification for all rows")
+    df['Result'] = df.apply(lambda row: perform_classification(row, model, tokenizer), axis=1)
+    
+    num_tp = (df['Result'] == df['System Type']).sum()
+    accuracy = num_tp / len(df)
+
+    print(f"\n[DEBUG] Final Results:")
+    print(f"Total samples: {len(df)}")
+    print(f"Correct predictions: {num_tp}")
+    print(f"Accuracy: {accuracy:.2f}")
 
 if __name__ == "__main__":
     main()

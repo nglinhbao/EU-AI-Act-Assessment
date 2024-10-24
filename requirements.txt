@@ -5,3 +5,7 @@ SentencePiece
 protobuf
 accelerate
 langchain
+sentence-transformers
+langchain-community
+faiss-gpu
+chromadb
