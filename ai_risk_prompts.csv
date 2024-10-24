@@ -1,12 +1,61 @@
 Type,Prompt
 Unacceptable Risk,"Does this AI system exploit vulnerable individuals, such as children or elderly people?"
-Unacceptable Risk,Does this AI system engage in behavioral manipulation or influence user decisions unfairly?
-Unacceptable Risk,Is this AI system used for real-time biometric identification for law enforcement purposes?
-Unacceptable Risk,Is this AI system involved in social scoring or ranking individuals based on their personal data?
-High Risk,Does this AI system analyze job applications or assist in recruitment decisions?
-High Risk,"Does this AI system evaluate eligibility for public benefits, credit, or insurance?"
-High Risk,"Does this AI system evaluate product safety in critical industries (e.g., automotive, healthcare)?"
-Limited Risk,"Does this AI system interact directly with consumers, such as providing customer support?"
-Limited Risk,"Does this AI system generate or manipulate digital content (e.g., images, audio, video)?"
-Minimal Risk,"Is this AI system used for entertainment purposes, such as AI-enabled video games?"
-Minimal Risk,Is this AI system used for filtering spam or other similar non-critical tasks?
+Unacceptable Risk,"Is this AI system used for real-time biometric surveillance by law enforcement?"
+Unacceptable Risk,"Does this AI system engage in behavioural manipulation, influencing user decisions unfairly?"
+Unacceptable Risk,"Is this AI system involved in social scoring or profiling individuals based on personal data?"
+Unacceptable Risk,Does the AI facilitate unauthorised surveillance or tracking of individuals?
+Unacceptable Risk,Is the AI designed to intentionally deceive or mislead users?
+Unacceptable Risk,Does this system undermine human autonomy by overriding user decisions?
+Unacceptable Risk,Is this AI used in systems that could lead to physical harm or death?
+Unacceptable Risk,Does the AI enable targeted advertising to minors without consent?
+Unacceptable Risk,Is the AI used for military purposes or warfare?
+Unacceptable Risk,Does this system collect sensitive biometric data without explicit consent?
+Unacceptable Risk,Is the AI designed to perpetuate or amplify hate speech or misinformation?
+Unacceptable Risk,Does this system interfere with political processes or democratic institutions?
+Unacceptable Risk,Is this AI used for illegal activities or to circumvent the law?
+Unacceptable Risk,Does this AI create deepfakes or other manipulated content that misleads the public?
+High Risk,Does the AI evaluate candidates in recruitment or hiring processes?
+High Risk,Is the AI used to assess eligibility for public services or benefits?
+High Risk,Does this AI evaluate insurance claims or credit scores?
+High Risk,Is the AI involved in monitoring or managing safety-critical systems?
+High Risk,Does this system determine healthcare treatment recommendations?
+High Risk,Is the AI used to allocate resources in public administration?
+High Risk,Does the AI predict or monitor criminal behaviour?
+High Risk,Is this AI system used to monitor workplace performance or productivity?
+High Risk,Does the AI analyse personal financial data for decision-making?
+High Risk,"Is the AI involved in controlling physical infrastructure, like traffic or energy grids?"
+High Risk,Does the AI provide legal recommendations or aid in legal judgments?
+High Risk,Is the AI deployed to monitor or predict epidemics and public health risks?
+High Risk,Does the system influence academic admissions or student assessments?
+High Risk,Is this AI used for behavioural analysis in advertising or social media?
+High Risk,Does the AI support law enforcement investigations or surveillance?
+Limited Risk,Does this AI system interact with users through virtual assistance or chatbots?
+Limited Risk,Is the AI used to generate personalised recommendations?
+Limited Risk,"Does the AI manipulate digital media content, such as video or audio?"
+Limited Risk,Is the AI system responsible for customer service automation?
+Limited Risk,Does this system offer product or service recommendations online?
+Limited Risk,Is this AI system used for internal decision support?
+Limited Risk,"Does the AI help optimise business operations, such as scheduling or inventory?"
+Limited Risk,Is the AI system deployed for sentiment analysis of customer feedback?
+Limited Risk,Does this AI assist in translation or transcription tasks?
+Limited Risk,Is the system used to monitor user engagement on digital platforms?
+Limited Risk,Does the AI provide automated financial reporting or forecasting?
+Limited Risk,Is this AI system involved in network or cybersecurity monitoring?
+Limited Risk,Does the AI facilitate basic compliance monitoring or reporting?
+Limited Risk,Is the AI system used to support marketing campaigns?
+Limited Risk,Does this system perform predictive maintenance in non-critical environments?
+Minimal Risk,Is the AI used for spam filtering or email categorisation?
+Minimal Risk,Does the AI assist in automated content moderation?
+Minimal Risk,"Is this AI system applied in entertainment applications, such as gaming?"
+Minimal Risk,"Does the AI generate non-critical recommendations, like travel or recipes?"
+Minimal Risk,Is the AI used to support customer surveys or feedback collection?
+Minimal Risk,Does the AI system assist in non-essential scheduling tasks?
+Minimal Risk,"Is this AI used for personal productivity tools, such as reminders?"
+Minimal Risk,Does the AI analyse non-sensitive data for internal reports?
+Minimal Risk,Is the AI deployed for basic translation or language support?
+Minimal Risk,Does the system perform basic troubleshooting support for users?
+Minimal Risk,Is the AI used in visual or audio entertainment experiences?
+Minimal Risk,Does the AI provide non-essential recommendations in e-commerce?
+Minimal Risk,Is the AI system used to generate automated social media posts?
+Minimal Risk,Does the AI support content discovery in streaming platforms?
+Minimal Risk,Is the AI used for virtual tours or augmented reality applications?
