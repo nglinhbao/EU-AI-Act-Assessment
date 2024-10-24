@@ -4,3 +4,4 @@ pandas
 SentencePiece
 protobuf
 accelerate
+langchain
