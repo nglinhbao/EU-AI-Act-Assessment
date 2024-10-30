@@ -4,8 +4,14 @@ pandas
 SentencePiece
 protobuf
 accelerate
-langchain
 sentence-transformers
 langchain-community
 faiss-gpu
-chromadb
+tensorflow_hub
+scipy
+gensim
+tqdm
+joblib
+optimum
+auto-gptq
+tensorflow

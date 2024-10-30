@@ -4,37 +4,35 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
 import os
+from transformers import TextIteratorStreamer
+from evaluation import evaluate
+import re
 
 def get_system_description(txt_file_path):
-    print(f"[DEBUG] Attempting to read system description from: {txt_file_path}")
     if not os.path.isfile(txt_file_path):
-        print("[DEBUG] File not found. Please provide a valid .txt file path.")
+        print("File not found. Please provide a valid .txt file path.")
         return None
 
     try:
         with open(txt_file_path, 'r') as file:
             system_description = file.read()
-        print("[DEBUG] Successfully read system description")
         return system_description
     except Exception as e:
-        print(f"[DEBUG] Error reading the .txt file: {e}")
+        print(f"Error reading the .txt file: {e}")
         return None
 
 def retrive_information_from_csv(file_name):
-    print(f"[DEBUG] Attempting to read CSV file: {file_name}")
     try:
         df = pd.read_csv(file_name)
-        print(f"[DEBUG] Successfully loaded CSV with {len(df)} rows")
         return df
     except Exception as e:
-        print(f"[DEBUG] Error reading the CSV file: {e}")
+        print(f"Error reading the CSV file: {e}")
         return None
 
 def get_vector_db(risk_type, db_dir='./vector_db'):
     """
     Load the vector database for a specific risk type with safe deserialization.
     """
-    print(f"\n[DEBUG] Loading vector DB for risk type: {risk_type}")
     embeddings = HuggingFaceEmbeddings(
         model_name="sentence-transformers/all-mpnet-base-v2",
         model_kwargs={'device': 'cpu'}
@@ -42,143 +40,149 @@ def get_vector_db(risk_type, db_dir='./vector_db'):
     
     safe_name = risk_type.lower().replace(' ', '_')
     db_path = os.path.join(db_dir, safe_name)
-    print(f"[DEBUG] Looking for vector DB at path: {db_path}")
     
     if not os.path.exists(db_path):
-        print(f"[DEBUG] Vector DB not found at: {db_path}")
         raise ValueError(f"No vector database found for {risk_type}")
     
-    print(f"[DEBUG] Successfully loaded vector DB for: {risk_type}")
     return FAISS.load_local(db_path, embeddings, allow_dangerous_deserialization=True)
 
-def get_relevant_prompts(system_description, risk_type, k=3):
+def get_relevant_prompts(system_description, risk_type, k):
     """
     Retrieve k most relevant prompts from the vector database for a given risk type.
     """
-    print(f"\n[DEBUG] Getting {k} relevant prompts for risk type: {risk_type}")
     try:
         db = get_vector_db(risk_type)
-        print(f"[DEBUG] Performing similarity search for {risk_type}")
         results = db.similarity_search_with_score(system_description, k=k)
-        prompts = [doc.page_content for doc, score in results]
-        print(f"[DEBUG] Retrieved {len(prompts)} prompts for {risk_type}")
-        for i, (doc, score) in enumerate(results):
-            print(f"[DEBUG] Prompt {i+1} similarity score: {score}")
+        # Extract just the prompts from the results
+        prompts = [doc.page_content for doc, _ in results]
         return prompts
     except Exception as e:
-        print(f"[DEBUG] Error retrieving prompts for {risk_type}: {e}")
+        print(f"Error retrieving prompts for {risk_type}: {e}")
         return []
 
 def query_llama(model, tokenizer, system_description, prompt):
-    print("\n[DEBUG] Querying LLaMA model")
     device = "cuda" if torch.cuda.is_available() else "cpu"
-    print(f"[DEBUG] Using device: {device}")
-    
-    combined_input = f"System Description: {system_description}\n\nPrompt: {prompt}\n\nAnswer: "
-    print("[DEBUG] Tokenizing input")
+    combined_input = f"System Description: {system_description}\n\nPrompt: {prompt}"
     inputs = tokenizer(combined_input, return_tensors="pt").to(device)
-    
-    print("[DEBUG] Generating response")
-    outputs = model.generate(**inputs, max_new_tokens=1)
+    outputs = model.generate(**inputs, max_new_tokens=200)
     response = tokenizer.decode(outputs[0], skip_special_tokens=True)
-    print(f"[DEBUG] Raw model response: {response}")
-
-    answer = response.split("Answer: ")[-1].strip()
-    print(f"[DEBUG] Extracted answer: {answer}")
     
-    if answer.isdigit() and 1 <= int(answer) <= 5:
-        print(f"[DEBUG] Valid numerical response: {answer}")
-        return int(answer)
-    else:
-        print("[DEBUG] Invalid response, defaulting to 3")
-        return 3
+    try:
+        print(f"Raw response: {response}")  # Debug print
+        
+        # Split by "Score: " and get the second occurrence
+        score_parts = response.split("Score: ")
+        if len(score_parts) < 3:  # We need at least 3 parts to have 2 scores
+            return {"score": 3, "reasoning": "Failed to find second score"}
+            
+        score_text = score_parts[2].split()[0]  # Get the first word after second "Score: "
+        score = int(score_text)
+        
+        # Split by "Reasoning: " and get the second occurrence
+        reasoning_parts = response.split("Reasoning: ")
+        if len(reasoning_parts) < 3:  # We need at least 3 parts to have 2 reasonings
+            return {"score": score, "reasoning": "Failed to find second reasoning"}
+            
+        reasoning = reasoning_parts[2].split("\n")[0].strip()  # Get the first line after second "Reasoning: "
+        
+        # Validate score range
+        if not 1 <= score <= 5:
+            score = 3
+            
+        return {
+            "score": score,
+            "reasoning": reasoning
+        }
+            
+    except Exception as e:
+        print(f"Error parsing response: {e}")  # Debug print
+        return {
+            "score": 3,
+            "reasoning": "Error occurred while parsing response."
+        }
 
 def perform_classification(row, model, tokenizer, viz=True):
-    print("\n[DEBUG] Starting classification for new row")
     # Create detailed input description
     input_description = f"{row['AI System Description']}. It uses {row['Input Data Type']}. The system functions include: {row['System Functions']}. Benefits of Commercial Use: {row['Benefits of Commercial Use']}. Assumptions/Consents Regarding Data Usage: {row['Assumptions/Consents Regarding Data Usage']}"
-    print("[DEBUG] Created input description")
     
     base_prompt = """
-    Based on the description, assess the system on a scale of 1-5 based on a given question. 1 means absolutely no, and 5 means absolutely yes. 
+        Rate the system 1-5 based on the given question:
+        (only answer the main question and do not split the questions)
 
-    Here are some examples:
-
-    Question: Is this AI system used for entertainment purposes, such as AI-enabled video games?
-    Answer: 4
-
-    Question: Does this AI system process sensitive personal data without user consent?
-    Answer: 2
-
-    Question: Is this AI system involved in biometric surveillance in public spaces?
-    Answer: 5
-
-    Now, based on the description provided, answer the following question (Only return a single number for the result. Do not leave answers blank):
+        Score: [1-5]
+        Reasoning: [reasons why you give the score in 1 short paragraph]
     """
 
     risk_types = ["Unacceptable Risk", "High Risk", "Limited Risk", "Minimal Risk"]
-    print(f"[DEBUG] Evaluating risk types in order: {risk_types}")
     
     for risk_type in risk_types:
-        print(f"\n[DEBUG] Evaluating risk type: {risk_type}")
-        prompts = get_relevant_prompts(input_description, risk_type, k=3)
+        # Get relevant prompts for this risk type based on system description
+        prompts = get_relevant_prompts(input_description, risk_type, 1)
         
-        if not prompts:
-            print(f"[DEBUG] No prompts found for {risk_type}, skipping")
+        if not prompts:  # If no prompts found, skip this risk type
             continue
             
         level_sum = 0
         prompt_count = 0
+        current_reasoning = ""
         
         for prompt_text in prompts:
             full_prompt = base_prompt + prompt_text
-            print(f"\n[DEBUG] Processing prompt {prompt_count + 1} for {risk_type}")
-            answer = query_llama(model, tokenizer, input_description, full_prompt)
+            response = query_llama(model, tokenizer, input_description, full_prompt)
+            
             if viz:
                 print(f"Risk Type: {risk_type}")
                 print(f"Prompt: {prompt_text}")
-                print(f"Response: {answer}\n")
+                print(f"Score: {response['score']}")
+                print(f"Reasoning: {response['reasoning']}\n")
                 
-            level_sum += answer
+            level_sum += response['score']
             prompt_count += 1
+            current_reasoning += response['reasoning']  # Keep the last reasoning
         
         if prompt_count > 0:
             average_level = level_sum / prompt_count
-            print(f"[DEBUG] Average level for {risk_type}: {average_level}")
             if average_level > 3:
-                print(f"[DEBUG] Classification decision: {risk_type} (avg_level > 3)")
-                return risk_type
+                return {
+                    'risk_type': risk_type,
+                    'score': average_level,
+                    'reasoning': current_reasoning
+                }
             
         if risk_type == "Minimal Risk":
-            print("[DEBUG] Reached Minimal Risk evaluation, breaking loop")
             break
     
-    print("[DEBUG] No higher risk levels met criteria, returning Minimal Risk")
-    return "Minimal Risk"
+    return {
+        'risk_type': "Minimal Risk",
+        'score': average_level if 'average_level' in locals() else 0,
+        'reasoning': current_reasoning if 'current_reasoning' in locals() else "No specific risks identified."
+    }
 
 def main():
-    print("[DEBUG] Starting main function")
-    csv_file_path = './ai_risk_prompts.csv'
-    model_name = "meta-llama/Llama-2-7b-hf"
+    csv_file_path = './datasets/ai_risk_prompts.csv'
+    model_name = "TheBloke/Nous-Hermes-Llama2-GPTQ"
+    # model_name = "meta-llama/Llama-2-7b-hf"
 
-    print(f"[DEBUG] Loading model and tokenizer: {model_name}")
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     model = AutoModelForCausalLM.from_pretrained(model_name, torch_dtype=torch.float16, device_map="auto")
-    print("[DEBUG] Model and tokenizer loaded successfully")
     
-    synthetic_dataset = './sample.csv'
+    synthetic_dataset = './datasets/sample.csv'
     df = retrive_information_from_csv(synthetic_dataset)
     
-    print("\n[DEBUG] Starting classification for all rows")
-    df['Result'] = df.apply(lambda row: perform_classification(row, model, tokenizer), axis=1)
+    # Apply classification and extract results
+    results = df.apply(lambda row: perform_classification(row, model, tokenizer), axis=1)
     
-    num_tp = (df['Result'] == df['System Type']).sum()
-    accuracy = num_tp / len(df)
+    # Assign risk type, score, and reasoning to separate columns
+    df['Predicted System Type'] = results.apply(lambda x: x['risk_type'])
+    df['Reason'] = results.apply(lambda x: x['reasoning'])
+    
+    # Optionally, save the updated dataframe
+    df.to_csv('results/results.csv', index=False)
 
-    print(f"\n[DEBUG] Final Results:")
-    print(f"Total samples: {len(df)}")
-    print(f"Correct predictions: {num_tp}")
-    print(f"Accuracy: {accuracy:.2f}")
+    df = evaluate(df)
+
+    print(f"Accuracy: {df['Accuracy']:.2f}")
+    print(f"Fairness Score: {df['Fairness Score']:.2f}")
 
 if __name__ == "__main__":
     main()

@@ -2,6 +2,7 @@ import pandas as pd
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 import os
+from evaluation import evaluate
 
 def get_system_description(txt_file_path):
     if not os.path.isfile(txt_file_path):
@@ -107,11 +108,9 @@ def main():
     # Incorporate more columns into the input description and classification process
     df['Result'] = df.apply(lambda row: perform_classification(row, model, tokenizer, prompts_df), axis=1)
     
-    # Compute accuracy by comparing the model's result to the ground truth "System Type"
-    num_tp = (df['Result'] == df['System Type']).sum()
-    accuracy = num_tp / len(df)
+    df = evaluate(df)
 
-    print(f"Accuracy: {accuracy:.2f}")
+    print(f"Accuracy: {df['Accuracy']:.2f}")
 
 if __name__ == "__main__":
     main()
