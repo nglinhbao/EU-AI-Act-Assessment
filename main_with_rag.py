@@ -4,7 +4,6 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
 import os
-from transformers import TextIteratorStreamer
 from evaluation import evaluate
 import re
 
@@ -67,37 +66,40 @@ def query_llama(model, tokenizer, system_description, prompt):
     outputs = model.generate(**inputs, max_new_tokens=200)
     response = tokenizer.decode(outputs[0], skip_special_tokens=True)
     
-    try:
-        print(f"Raw response: {response}")  # Debug print
+    try:        
+        # Extract the second "Answer: "
+        answer_parts = response.split("Answer:")
+        if len(answer_parts) < 3:  # Ensure we have at least two answers
+            return {"score": 2, "reasoning": "Failed to find second answer"}
         
-        # Split by "Score: " and get the second occurrence
-        score_parts = response.split("Score: ")
-        if len(score_parts) < 3:  # We need at least 3 parts to have 2 scores
-            return {"score": 3, "reasoning": "Failed to find second score"}
+        answer_text = answer_parts[2].strip().split()[0]  # Get the first word after second "Answer: "
+        
+        # Map answer to score
+        if answer_text.lower() == "yes":
+            score = 3
+        elif answer_text.lower() == "neutral":
+            score = 2
+        elif answer_text.lower() == "no":
+            score = 1
+        else:
+            score = 2  # Default to Neutral if answer is unrecognized
             
-        score_text = score_parts[2].split()[0]  # Get the first word after second "Score: "
-        score = int(score_text)
-        
-        # Split by "Reasoning: " and get the second occurrence
-        reasoning_parts = response.split("Reasoning: ")
-        if len(reasoning_parts) < 3:  # We need at least 3 parts to have 2 reasonings
+        # Extract the second "Reasoning: "
+        reasoning_parts = response.split("Reasoning:")
+        if len(reasoning_parts) < 3:  # Ensure we have at least two reasonings
             return {"score": score, "reasoning": "Failed to find second reasoning"}
-            
+        
         reasoning = reasoning_parts[2].split("\n")[0].strip()  # Get the first line after second "Reasoning: "
         
-        # Validate score range
-        if not 1 <= score <= 5:
-            score = 3
-            
         return {
             "score": score,
             "reasoning": reasoning
         }
-            
+        
     except Exception as e:
         print(f"Error parsing response: {e}")  # Debug print
         return {
-            "score": 3,
+            "score": 2,  # Default to Neutral in case of an error
             "reasoning": "Error occurred while parsing response."
         }
 
@@ -106,10 +108,11 @@ def perform_classification(row, model, tokenizer, viz=True):
     input_description = f"{row['AI System Description']}. It uses {row['Input Data Type']}. The system functions include: {row['System Functions']}. Benefits of Commercial Use: {row['Benefits of Commercial Use']}. Assumptions/Consents Regarding Data Usage: {row['Assumptions/Consents Regarding Data Usage']}"
     
     base_prompt = """
-        Rate the system 1-5 based on the given question:
-        (only answer the main question and do not split the questions)
-
-        Score: [1-5]
+        Answer the question with 'Yes', 'Neutral', or 'No'
+        (only answer the main question and do not split the question)
+        
+        Template:
+        Answer: [Yes/Neutral/No]
         Reasoning: [reasons why you give the score in 1 short paragraph]
     """
 
@@ -117,7 +120,7 @@ def perform_classification(row, model, tokenizer, viz=True):
     
     for risk_type in risk_types:
         # Get relevant prompts for this risk type based on system description
-        prompts = get_relevant_prompts(input_description, risk_type, 1)
+        prompts = get_relevant_prompts(input_description, risk_type, 4)
         
         if not prompts:  # If no prompts found, skip this risk type
             continue
@@ -142,7 +145,7 @@ def perform_classification(row, model, tokenizer, viz=True):
         
         if prompt_count > 0:
             average_level = level_sum / prompt_count
-            if average_level > 3:
+            if average_level > 2:
                 return {
                     'risk_type': risk_type,
                     'score': average_level,
@@ -175,11 +178,10 @@ def main():
     # Assign risk type, score, and reasoning to separate columns
     df['Predicted System Type'] = results.apply(lambda x: x['risk_type'])
     df['Reason'] = results.apply(lambda x: x['reasoning'])
-    
-    # Optionally, save the updated dataframe
-    df.to_csv('results/results.csv', index=False)
 
     df = evaluate(df)
+
+    df.to_csv('datasets/results.csv', index=False)
 
     print(f"Accuracy: {df['Accuracy']:.2f}")
     print(f"Fairness Score: {df['Fairness Score']:.2f}")
