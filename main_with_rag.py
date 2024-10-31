@@ -4,7 +4,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
 import os
-from evaluation import evaluate
+# from evaluation import evaluate
 import re
 
 def get_system_description(txt_file_path):
@@ -146,7 +146,7 @@ def perform_classification(row, model, tokenizer, viz=True):
                 if response['score'] == 1:
                     return {
                         'risk_type': risk_type,
-                        'confidence score': confidence_score,
+                        'confidence_score': confidence_score,
                         'reasoning': current_reasoning
                     }
                 
@@ -155,7 +155,7 @@ def perform_classification(row, model, tokenizer, viz=True):
     
     return {
         'risk_type': "Minimal Risk",
-        'confidence score': confidence_score if 'confidence_score' in locals() else 0,
+        'confidence_score': confidence_score if 'confidence_score' in locals() else 0,
         'reasoning': current_reasoning if 'current_reasoning' in locals() else "No specific risks identified."
     }
 
@@ -167,22 +167,23 @@ def main():
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     model = AutoModelForCausalLM.from_pretrained(model_name, torch_dtype=torch.float16, device_map="auto")
     
-    synthetic_dataset = './datasets/sample.csv'
+    synthetic_dataset = './datasets/small_sample.csv'
     df = retrive_information_from_csv(synthetic_dataset)
     
     # Apply classification and extract results
     results = df.apply(lambda row: perform_classification(row, model, tokenizer), axis=1)
     
     # Assign risk type, score, and reasoning to separate columns
+    df['Confidence Score'] = results.apply(lambda x: x['confidence_score'])
     df['Predicted System Type'] = results.apply(lambda x: x['risk_type'])
     df['Reason'] = results.apply(lambda x: x['reasoning'])
 
-    df = evaluate(df)
+    # df = evaluate(df)
 
     df.to_csv('datasets/results.csv', index=False)
 
-    print(f"Accuracy: {df['Accuracy']:.2f}")
-    print(f"Fairness Score: {df['Fairness Score']:.2f}")
+    # print(f"Accuracy: {df['Accuracy']:.2f}")
+    # print(f"Fairness Score: {df['Fairness Score']:.2f}")
 
 if __name__ == "__main__":
     main()

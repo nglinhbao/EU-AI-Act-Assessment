@@ -94,7 +94,8 @@ def evaluate(df):
     
     # Add Fairness score and accuracy columns to df
     df['Fairness Score'] = fairness_scores
-    df['Accuracy'] = accuracy
+
+    df.to_csv('datasets/evaluated_results.csv', index=False)
     
     return df
 
