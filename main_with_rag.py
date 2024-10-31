@@ -68,28 +68,25 @@ def query_llama(model, tokenizer, system_description, prompt):
     
     try:        
         # Extract the second "Answer: "
-        answer_parts = response.split("Answer:")
+        answer_parts = response.split("Answer: ")
         if len(answer_parts) < 3:  # Ensure we have at least two answers
-            return {"score": 2, "reasoning": "Failed to find second answer"}
+            return {"score": 0.5, "reasoning": "Failed to find second answer"}
         
         answer_text = answer_parts[2].strip().split()[0]  # Get the first word after second "Answer: "
-        
         # Map answer to score
-        if answer_text.lower() == "yes":
-            score = 3
-        elif answer_text.lower() == "neutral":
-            score = 2
-        elif answer_text.lower() == "no":
+        if answer_text.lower() in ["yes", " yes", "yes.", " yes."]:
             score = 1
+        elif answer_text.lower() in ["no", " no", "no.", " no."]:
+            score = 0
         else:
-            score = 2  # Default to Neutral if answer is unrecognized
+            score = 0.5  # Default to Neutral if answer is unrecognized
             
         # Extract the second "Reasoning: "
-        reasoning_parts = response.split("Reasoning:")
+        reasoning_parts = response.split("Reasoning: ")
         if len(reasoning_parts) < 3:  # Ensure we have at least two reasonings
-            return {"score": score, "reasoning": "Failed to find second reasoning"}
-        
-        reasoning = reasoning_parts[2].split("\n")[0].strip()  # Get the first line after second "Reasoning: "
+            reasoning = answer_parts[2].strip()
+        else:
+            reasoning = reasoning_parts[2].split("\n")[0].strip()  # Get the first line after second "Reasoning: "
         
         return {
             "score": score,
@@ -99,7 +96,7 @@ def query_llama(model, tokenizer, system_description, prompt):
     except Exception as e:
         print(f"Error parsing response: {e}")  # Debug print
         return {
-            "score": 2,  # Default to Neutral in case of an error
+            "score": 0.5,  # Default to Neutral in case of an error
             "reasoning": "Error occurred while parsing response."
         }
 
@@ -108,11 +105,11 @@ def perform_classification(row, model, tokenizer, viz=True):
     input_description = f"{row['AI System Description']}. It uses {row['Input Data Type']}. The system functions include: {row['System Functions']}. Benefits of Commercial Use: {row['Benefits of Commercial Use']}. Assumptions/Consents Regarding Data Usage: {row['Assumptions/Consents Regarding Data Usage']}"
     
     base_prompt = """
-        Answer the question with 'Yes', 'Neutral', or 'No'
+        Answer the question with 'Yes' or 'No'
         (only answer the main question and do not split the question)
         
         Template:
-        Answer: [Yes/Neutral/No]
+        Answer: [Yes/No]
         Reasoning: [reasons why you give the score in 1 short paragraph]
     """
 
@@ -125,7 +122,7 @@ def perform_classification(row, model, tokenizer, viz=True):
         if not prompts:  # If no prompts found, skip this risk type
             continue
             
-        level_sum = 0
+        score_sum = 0
         prompt_count = 0
         current_reasoning = ""
         
@@ -136,28 +133,29 @@ def perform_classification(row, model, tokenizer, viz=True):
             if viz:
                 print(f"Risk Type: {risk_type}")
                 print(f"Prompt: {prompt_text}")
+                print(f"App description: {input_description}")
                 print(f"Score: {response['score']}")
                 print(f"Reasoning: {response['reasoning']}\n")
                 
-            level_sum += response['score']
+            score_sum += response['score']
             prompt_count += 1
             current_reasoning += response['reasoning']  # Keep the last reasoning
         
-        if prompt_count > 0:
-            average_level = level_sum / prompt_count
-            if average_level > 2:
-                return {
-                    'risk_type': risk_type,
-                    'score': average_level,
-                    'reasoning': current_reasoning
-                }
-            
-        if risk_type == "Minimal Risk":
-            break
+            if prompt_count > 0:
+                confidence_score = score_sum / prompt_count
+                if response['score'] == 1:
+                    return {
+                        'risk_type': risk_type,
+                        'confidence score': confidence_score,
+                        'reasoning': current_reasoning
+                    }
+                
+            if risk_type == "Minimal Risk":
+                break
     
     return {
         'risk_type': "Minimal Risk",
-        'score': average_level if 'average_level' in locals() else 0,
+        'confidence score': confidence_score if 'confidence_score' in locals() else 0,
         'reasoning': current_reasoning if 'current_reasoning' in locals() else "No specific risks identified."
     }
 
