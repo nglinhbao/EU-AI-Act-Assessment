@@ -114,6 +114,8 @@ def perform_classification(row, model, tokenizer, viz=True):
     """
 
     risk_types = ["Unacceptable Risk", "High Risk", "Limited Risk", "Minimal Risk"]
+
+    current_reasoning = ""
     
     for risk_type in risk_types:
         # Get relevant prompts for this risk type based on system description
@@ -124,7 +126,6 @@ def perform_classification(row, model, tokenizer, viz=True):
             
         score_sum = 0
         prompt_count = 0
-        current_reasoning = ""
         
         for prompt_text in prompts:
             full_prompt = base_prompt + prompt_text
@@ -139,7 +140,7 @@ def perform_classification(row, model, tokenizer, viz=True):
                 
             score_sum += response['score']
             prompt_count += 1
-            current_reasoning += response['reasoning']  # Keep the last reasoning
+            current_reasoning += response['reasoning']
         
             if prompt_count > 0:
                 confidence_score = score_sum / prompt_count
@@ -174,7 +175,7 @@ def main():
     results = df.apply(lambda row: perform_classification(row, model, tokenizer), axis=1)
     
     # Assign risk type, score, and reasoning to separate columns
-    df['Confidence Score'] = results.apply(lambda x: x['confidence_score'])
+    # df['Confidence Score'] = results.apply(lambda x: x['confidence_score'])
     df['Predicted System Type'] = results.apply(lambda x: x['risk_type'])
     df['Reason'] = results.apply(lambda x: x['reasoning'])
 

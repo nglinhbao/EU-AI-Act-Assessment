@@ -7,7 +7,6 @@ from tqdm import tqdm
 import joblib
 import pandas as pd
 import tensorflow as tf
-tf.config.set_visible_devices([], 'GPU')
 
 def load_models(model_path='./models/Model-LR_TUW.pkl', word2vec_path='./models/GoogleNews-vectors-negative300.bin'):
     """Load all required models."""
@@ -70,6 +69,7 @@ def combine_features(texts, word2vec_model, word2vec_words, use_model):
     return hstack((tfidf_features, use_features, w2v_features))
 
 def evaluate(df):
+    tf.config.set_visible_devices([], 'GPU')
     """Predict fairness scores and calculate accuracy."""
     # Load models
     word2vec_model, word2vec_words, classifier_model, use_model = load_models()
