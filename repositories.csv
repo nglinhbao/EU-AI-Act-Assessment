@@ -1,0 +1,361 @@
+name,description,url
+ai,"The AI Toolkit for TypeScript. From the creators of Next.js, the AI SDK is a free open-source library for building AI-powered applications and agents ",https://github.com/vercel/ai
+AI,Microsoft AI,https://github.com/microsoft/AI
+gpt-crawler,Crawl a site to generate knowledge files to create your own custom GPT from a URL,https://github.com/BuilderIO/gpt-crawler
+ai,This repository will have different projects using AutoGen and Tutorials,https://github.com/tylerprogramming/ai
+AirSim,"Open source simulator for autonomous vehicles built on Unreal Engine / Unity, from Microsoft AI & Research",https://github.com/microsoft/AirSim
+generative-ai-for-beginners,"21 Lessons, Get Started Building with Generative AI  🔗 https://microsoft.github.io/generative-ai-for-beginners/",https://github.com/microsoft/generative-ai-for-beginners
+airflow,"Apache Airflow - A platform to programmatically author, schedule, and monitor workflows",https://github.com/apache/airflow
+ailearning,AiLearning：数据分析+机器学习实战+线性代数+PyTorch+NLTK+TF2,https://github.com/apachecn/ailearning
+roop,one-click face swap,https://github.com/s0md3v/roop
+Jobs_Applier_AI_Agent_AIHawk,"Jobs_Applier_AI_Agent_AIHawk aims to easy job hunt process by automating the job application process. Utilizing artificial intelligence, it enables users to apply for multiple jobs in a tailored way.",https://github.com/feder-cr/Jobs_Applier_AI_Agent_AIHawk
+chatbot-ui,AI chat for any model.,https://github.com/mckaywrigley/chatbot-ui
+ai,💕 A bot for Misskey,https://github.com/syuilo/ai
+courses,fast.ai Courses,https://github.com/fastai/courses
+ColossalAI,"Making large AI models cheaper, faster and more accessible",https://github.com/hpcaitech/ColossalAI
+CopilotKit,"React UI + elegant infrastructure for AI Copilots, AI chatbots, and in-app AI agents. The Agentic last-mile 🪁",https://github.com/CopilotKit/CopilotKit
+vespa,"AI + Data, online. https://vespa.ai",https://github.com/vespa-engine/vespa
+airbyte,"The leading data integration platform for ETL / ELT data pipelines from APIs, databases & files to data warehouses, data lakes & data lakehouses. Both self-hosted and Cloud-hosted.",https://github.com/airbytehq/airbyte
+gpt-pilot,The first real AI developer,https://github.com/Pythagora-io/gpt-pilot
+crewAI,"Framework for orchestrating role-playing, autonomous AI agents. By fostering collaborative intelligence, CrewAI empowers agents to work together seamlessly, tackling complex tasks.",https://github.com/crewAIInc/crewAI
+mlcourse.ai,Open Machine Learning Course,https://github.com/Yorko/mlcourse.ai
+cursor,The AI Code Editor,https://github.com/getcursor/cursor
+AISystem,AISystem 主要是指AI系统，包括AI芯片、AI编译器、AI推理和训练框架等AI全栈底层技术,https://github.com/chenzomi12/AISystem
+AirBnB_clone,,https://github.com/justinmajetich/AirBnB_clone
+agentic,AI agent stdlib that works with any LLM and TypeScript AI SDK.,https://github.com/transitive-bullshit/agentic
+aider,aider is AI pair programming in your terminal,https://github.com/Aider-AI/aider
+AI-For-Beginners,"12 Weeks, 24 Lessons, AI for All!",https://github.com/microsoft/AI-For-Beginners
+gpt-ai-assistant,OpenAI + LINE + Vercel = GPT AI Assistant,https://github.com/memochou1993/gpt-ai-assistant
+browser-use,Make websites accessible for AI agents,https://github.com/browser-use/browser-use
+generative-models,Generative Models by Stability AI,https://github.com/Stability-AI/generative-models
+ai-chatbot,"A full-featured, hackable Next.js AI chatbot built by Vercel",https://github.com/vercel/ai-chatbot
+cheatsheets-ai,Essential Cheat Sheets for deep learning and machine learning researchers https://medium.com/@kailashahirwar/essential-cheat-sheets-for-machine-learning-and-deep-learning-researchers-efb6a8ebd2e5,https://github.com/kailashahirwar/cheatsheets-ai
+ai,,https://github.com/iceener/ai
+open-webui,"User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",https://github.com/open-webui/open-webui
+LocalAI,":robot: The free, Open Source alternative to OpenAI, Claude and others. Self-hosted and local-first. Drop-in replacement for OpenAI,  running on consumer-grade hardware. No GPU required. Runs gguf, transformers, diffusers and many more models architectures. Features: Generate Text, Audio, Video, Images, Voice Cloning, Distributed, P2P inference",https://github.com/mudler/LocalAI
+susi.ai,SUSI.AI Web Client https://susi.ai,https://github.com/fossasia/susi.ai
+ai-hedge-fund,An AI Hedge Fund Team,https://github.com/virattt/ai-hedge-fund
+AI4Animation,Bringing Characters to Life with Computer Brains in Unity,https://github.com/sebastianstarke/AI4Animation
+google-research,Google Research,https://github.com/google-research/google-research
+InvokeAI,"Invoke is a leading creative engine for Stable Diffusion models, empowering professionals, artists, and enthusiasts to generate and create visual media using the latest AI-driven technologies. The solution offers an industry leading WebUI, and serves as the foundation for multiple commercial products.",https://github.com/invoke-ai/InvokeAI
+ai-edu,"AI education materials for Chinese students, teachers and IT professionals.",https://github.com/microsoft/ai-edu
+GURU-Ai,SIMPLE YET COMPLICATED 🚩,https://github.com/Guru322/GURU-Ai
+higress,🤖 AI Gateway | AI Native API Gateway,https://github.com/alibaba/higress
+deeplearning_ai_books,deeplearning.ai（吴恩达老师的深度学习课程笔记及资源）,https://github.com/fengdu78/deeplearning_ai_books
+aiohttp,Asynchronous HTTP client/server framework for asyncio and Python,https://github.com/aio-libs/aiohttp
+ai-shell,A CLI that converts natural language to shell commands.,https://github.com/BuilderIO/ai-shell
+generative-ai,"Sample code and notebooks for Generative AI on Google Cloud, with Gemini on Vertex AI",https://github.com/GoogleCloudPlatform/generative-ai
+AirBnB_clone_v2,,https://github.com/alexaorrico/AirBnB_clone_v2
+aima-python,"Python implementation of algorithms from Russell And Norvig's ""Artificial Intelligence - A Modern Approach""",https://github.com/aimacode/aima-python
+Ai-Learn,"人工智能学习路线图，整理近200个实战案例与项目，免费提供配套教材，零基础入门，就业实战！包括：Python，数学，机器学习，数据分析，深度学习，计算机视觉，自然语言处理，PyTorch tensorflow machine-learning,deep-learning data-analysis data-mining mathematics data-science artificial-intelligence python tensorflow tensorflow2 caffe keras pytorch algorithm numpy pandas matplotlib seaborn nlp cv等热门领域",https://github.com/tangyudi/Ai-Learn
+AI-102-AIEngineer,Lab files for AI-102 - AI Engineer,https://github.com/MicrosoftLearning/AI-102-AIEngineer
+tabby,Self-hosted AI coding assistant,https://github.com/TabbyML/tabby
+Scrapegraph-ai,Python scraper based on AI,https://github.com/ScrapeGraphAI/Scrapegraph-ai
+pandas-ai,"Chat with your database or your datalake (SQL, CSV, parquet). PandasAI makes data analysis conversational using LLMs and RAG.",https://github.com/sinaptik-ai/pandas-ai
+agent-zero,Agent Zero AI framework,https://github.com/frdel/agent-zero
+AIF360,"A comprehensive set of fairness metrics for datasets and machine learning models, explanations for these metrics, and algorithms to mitigate bias in datasets and models.",https://github.com/Trusted-AI/AIF360
+mem0,The Memory layer for AI Agents,https://github.com/mem0ai/mem0
+ParlAI,A framework for training and evaluating AI models on a variety of openly available dialogue datasets.,https://github.com/facebookresearch/ParlAI
+ai-pdf-chatbot-langchain,LangChain & LangGraph AI PDF chatbot agent,https://github.com/mayooear/ai-pdf-chatbot-langchain
+ImageAI,A python library built to empower developers to build applications and systems  with self-contained Computer Vision capabilities,https://github.com/OlafenwaMoses/ImageAI
+AI,artificial intelligence on python!,https://github.com/myuon/AI
+ai,bash script to install Artifical Images materials,https://github.com/dvschultz/ai
+RagaAI-Catalyst,"Python SDK for Agent AI Observability, Monitoring and Evaluation Framework. Includes features like agent, llm and tools tracing, debugging multi-agentic system, self-hosted dashboard and advanced analytics with timeline and execution graph view ",https://github.com/raga-ai-hub/RagaAI-Catalyst
+crawl4ai,"🚀🤖 Crawl4AI: Open-source LLM Friendly Web Crawler & Scraper. Don't be shy, join here: https://discord.gg/mEkkMXFG",https://github.com/unclecode/crawl4ai
+kirara-ai,🤖 可 DIY 的 多模态 AI 聊天机器人 | 🚀 快速接入 微信、 QQ、Telegram、等聊天平台 | 🦈支持DeepSeek、Grok、Claude、Ollama、Gemini、OpenAI | 工作流系统、网页搜索、AI画图、人设调教、虚拟女仆、语音对话 | ,https://github.com/lss233/kirara-ai
+TabNine,AI Code Completions,https://github.com/codota/TabNine
+aimoneyhunter,ai副业赚钱大集合，教你如何利用ai做一些副业项目，赚取更多额外收益。The Ultimate Guide to Making Money with AI Side Hustles: Learn how to leverage AI for some cool side gigs and rake in some extra cash. Check out the English version for more insights.,https://github.com/bleedline/aimoneyhunter
+pinokio,AI Browser,https://github.com/pinokiocomputer/pinokio
+mindsdb,AI's query engine - Platform for building AI that can learn and answer questions over large scale federated data.,https://github.com/mindsdb/mindsdb
+AI-Expert-Roadmap,Roadmap to becoming an Artificial Intelligence Expert in 2022,https://github.com/AMAI-GmbH/AI-Expert-Roadmap
+ai,像查询数据库一样优雅调用人工智能API,https://github.com/huanghe/ai
+ai-collection,The Generative AI Landscape - A Collection of Awesome Generative AI Applications,https://github.com/ai-collection/ai-collection
+NextChat,✨ Light and Fast AI Assistant. Support: Web | iOS | MacOS | Android |  Linux | Windows,https://github.com/ChatGPTNextWeb/NextChat
+Perplexica,Perplexica is an AI-powered search engine. It is an Open source alternative to Perplexity AI,https://github.com/ItzCrazyKns/Perplexica
+AirCash,Cash system for AIR.,https://github.com/Aircoin-official/AirCash
+AidLearning-FrameWork,"🔥🔥🔥AidLearning is a powerful AIOT development platform, AidLearning builds a linux env supporting GUI, deep learning and visual IDE on Android...Now Aid supports CPU+GPU+NPU for inference with high performance acceleration...Linux on Android or HarmonyOS ",https://github.com/aidlearning/AidLearning-FrameWork
+xiaozhi-esp32,Build your own AI friend,https://github.com/78/xiaozhi-esp32
+ailab,"Experience, Learn and Code the latest breakthrough innovations with Microsoft AI",https://github.com/microsoft/ailab
+Mr.-Ranedeer-AI-Tutor,A GPT-4 AI Tutor Prompt for customizable personalized learning experiences.,https://github.com/JushBJJ/Mr.-Ranedeer-AI-Tutor
+E2B,Secure open source cloud runtime for AI apps & AI agents,https://github.com/e2b-dev/E2B
+Airtest,UI Automation Framework for Games and Apps,https://github.com/AirtestProject/Airtest
+aisuite,"Simple, unified interface to multiple Generative AI providers ",https://github.com/andrewyng/aisuite
+AI-Scientist,The AI Scientist: Towards Fully Automated Open-Ended Scientific Discovery 🧑‍🔬,https://github.com/SakanaAI/AI-Scientist
+StableLM,StableLM: Stability AI Language Models,https://github.com/Stability-AI/StableLM
+anything-llm,"The all-in-one Desktop & Docker AI application with built-in RAG, AI agents, No-code agent builder, and more.",https://github.com/Mintplex-Labs/anything-llm
+air,☁️ Live reload for Go apps,https://github.com/air-verse/air
+aimto408,🇨🇳🇨🇳🇨🇳这个repo是为了那些准备死磕 计算机考研 4️⃣0️⃣8️⃣的考研党准备的，当然你如果4门课中的部分也可以看看，欢迎star📝📝📝，祝你们一战成硕🏆🏆🏆~~（更新23年大纲变化----2023年408和数学基本无变化）,https://github.com/xiaolei565/aimto408
+airgeddon,This is a multi-use bash script for Linux systems to audit wireless networks.,https://github.com/v1s1t0r1sh3r3/airgeddon
+susi_android,SUSI.AI Android App https://play.google.com/apps/testing/ai.susi,https://github.com/fossasia/susi_android
+kong,🦍 The Cloud-Native API Gateway and AI Gateway.,https://github.com/Kong/kong
+vim-airline,lean & mean status/tabline for vim that's light as air,https://github.com/vim-airline/vim-airline
+MONAI,AI Toolkit for Healthcare Imaging,https://github.com/Project-MONAI/MONAI
+aircraft,The A32NX & A380X Project are community driven open source projects to create free Airbus aircraft in Microsoft Flight Simulator that are as close to reality as possible.,https://github.com/flybywiresim/aircraft
+aidea,AIdea 是一款支持 GPT  以及国产大语言模型通义千问、文心一言等，支持 Stable Diffusion 文生图、图生图、 SDXL1.0、超分辨率、图片上色的全能型 APP。,https://github.com/mylxsw/aidea
+StableStudio,Community interface for generative AI,https://github.com/Stability-AI/StableStudio
+web-ui,Run AI Agent in your browser.,https://github.com/browser-use/web-ui
+course-v3,The 3rd edition of course.fast.ai,https://github.com/fastai/course-v3
+AisenWeiBo,新浪微博第三方Android客户端,https://github.com/wangdan/AisenWeiBo
+phoenix,AI Observability & Evaluation,https://github.com/Arize-ai/phoenix
+ray,Ray is an AI compute engine. Ray consists of a core distributed runtime and a set of AI Libraries for accelerating ML workloads.,https://github.com/ray-project/ray
+awesome-ai-agents,A list of AI autonomous agents,https://github.com/e2b-dev/awesome-ai-agents
+AI,机器学习、深度学习、自然语言处理、计算机视觉等AI领域相关技术的算法推导及应用,https://github.com/excelsimon/AI
+ai-deadlines,:alarm_clock: AI conference deadline countdowns ,https://github.com/paperswithcode/ai-deadlines
+spring-ai,An Application Framework for AI Engineering,https://github.com/spring-projects/spring-ai
+mage-ai,"🧙 Build, run, and manage data pipelines for integrating and transforming data.",https://github.com/mage-ai/mage-ai
+awesome-mcp-servers,A collection of MCP servers.,https://github.com/punkpeye/awesome-mcp-servers
+fairseq,Facebook AI Research Sequence-to-Sequence Toolkit written in Python.,https://github.com/facebookresearch/fairseq
+ai-town,"A MIT-licensed, deployable starter kit for building and customizing your own version of AI town - a virtual town where AI characters live, chat and socialize.",https://github.com/a16z-infra/ai-town
+docling,Get your documents ready for gen AI,https://github.com/DS4SD/docling
+chroma,the AI-native open-source embedding database,https://github.com/chroma-core/chroma
+aiogram,aiogram is a modern and fully asynchronous framework for Telegram Bot API written in Python using asyncio,https://github.com/aiogram/aiogram
+david-ai,"David AI is a free and open-source collection of customizable, production-ready UI components built with Tailwind CSS.",https://github.com/creativetimofficial/david-ai
+awesome-generative-ai-guide,"A one stop repository for generative AI research updates, interview resources, notebooks and much more!",https://github.com/aishwaryanr/awesome-generative-ai-guide
+AgentGPT,"🤖 Assemble, configure, and deploy autonomous AI Agents in your browser.",https://github.com/reworkd/AgentGPT
+AiLearning-Theory-Applying,快速上手AI理论及应用实战：基础知识、Transformer、NLP、ML、DL、竞赛。含大量注释及数据集，力求每一位能看懂并复现。,https://github.com/ben1234560/AiLearning-Theory-Applying
+AIChatWeb,在ChatGPT-Next-Web的基础上，增加注册登录，额度限制，邀请，敏感词，支付，基于docker一键部署。提供后台管理系统，可配置标题、欢迎词、额度不足提醒、公告,https://github.com/Nanjiren01/AIChatWeb
+SerpentAI,Game Agent Framework. Helping you create AIs / Bots that learn to play any game you own!,https://github.com/SerpentAI/SerpentAI
+aimeos-laravel,"Laravel ecommerce package for ultra fast online shops, scalable marketplaces, complex B2B applications and #gigacommerce",https://github.com/aimeos/aimeos-laravel
+chainlit,Build Conversational AI in minutes ⚡️,https://github.com/Chainlit/chainlit
+BERT-pytorch,Google AI 2018 BERT pytorch implementation,https://github.com/codertimo/BERT-pytorch
+course22,The fast.ai course notebooks,https://github.com/fastai/course22
+aiortc,WebRTC and ORTC implementation for Python using asyncio,https://github.com/aiortc/aiortc
+apisix,The Cloud-Native API Gateway and AI Gateway,https://github.com/apache/apisix
+AirplayServer,Android server for Airplay2,https://github.com/KqSMea8/AirplayServer
+core,AI agent microservice,https://github.com/cheshire-cat-ai/core
+susi_server,SUSI.AI server backend - the Artificial Intelligence server for personal assistants  https://susi.ai,https://github.com/fossasia/susi_server
+dalai,The simplest way to run LLaMA on your local machine,https://github.com/cocktailpeanut/dalai
+AirConnect,Use AirPlay to stream to UPnP/Sonos & Chromecast devices,https://github.com/philippe44/AirConnect
+AI-Aimbot,"World's Best AI Aimbot - CS2, Valorant, Fortnite, APEX, every game",https://github.com/RootKit-Org/AI-Aimbot
+air-datepicker,"Lightweight, dependency-free JavaScript datepicker.",https://github.com/t1m0n/air-datepicker
+AimTux,A large Linux csgo cheat/hack,https://github.com/AimTuxOfficial/AimTux
+aircrack-ng,WiFi security auditing tools suite,https://github.com/aircrack-ng/aircrack-ng
+project_openai_codex,Build and Deploy Your Own ChatGPT AI Application That Will Help You Code,https://github.com/adrianhajdin/project_openai_codex
+companion-app,AI companions with memory: a lightweight stack to create and host your own AI companions,https://github.com/a16z-infra/companion-app
+AI0x0.com,一个多模态多模型通用型的全局全能 AI 查询生成桌面悬浮助手应用,https://github.com/mushan0x0/AI0x0.com
+DeepLearning.ai-Summary,This repository contains my personal notes and summaries on DeepLearning.ai specialization courses. I've enjoyed every little bit of the course hope you enjoy my notes too.,https://github.com/mbadry1/DeepLearning.ai-Summary
+AIX360,Interpretability and explainability of data and machine learning models,https://github.com/Trusted-AI/AIX360
+sqlflow,Brings SQL and AI together.,https://github.com/sql-machine-learning/sqlflow
+hbox,AI on Hadoop,https://github.com/Qihoo360/hbox
+WrenAI,"🤖 Open-source GenBI AI Agent that empowers data-driven teams to chat with their data to generate Text-to-SQL, charts, spreadsheets, reports, and BI. 📈📊📋🧑‍💻",https://github.com/Canner/WrenAI
+street-fighter-ai,This is an AI agent for Street Fighter II Champion Edition.,https://github.com/linyiLYi/street-fighter-ai
+aicover,ai cover generator,https://github.com/all-in-aigc/aicover
+GenAI_Agents,"This repository provides tutorials and implementations for various Generative AI Agent techniques, from basic to advanced. It serves as a comprehensive guide for building intelligent, interactive AI systems.",https://github.com/NirDiamant/GenAI_Agents
+pydantic-ai,Agent Framework / shim to use Pydantic with LLMs,https://github.com/pydantic/pydantic-ai
+AutoGPT,"AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",https://github.com/Significant-Gravitas/AutoGPT
+sourcegraph-public-snapshot,Code AI platform with Code Search & Cody,https://github.com/sourcegraph/sourcegraph-public-snapshot
+clarity-upscaler,Clarity AI | AI Image Upscaler & Enhancer - free and open-source Magnific Alternative,https://github.com/philz1337x/clarity-upscaler
+ailab,,https://github.com/bilibili/ailab
+duix.ai,,https://github.com/GuijiAI/duix.ai
+oaqjp-final-project-emb-ai,final-project-emb-ai,https://github.com/ibm-developer-skills-network/oaqjp-final-project-emb-ai
+awesome-ai-painting,AI绘画资料合集（包含国内外可使用平台、使用教程、参数教程、部署教程、业界新闻等等） Stable diffusion、AnimateDiff、Stable Cascade 、Stable SDXL Turbo,https://github.com/hua1995116/awesome-ai-painting
+flower,Flower: A Friendly Federated AI Framework,https://github.com/adap/flower
+BitTiger,来自硅谷的终身学习大学,https://github.com/Fabsqrt/BitTiger
+aiXcoder-7B,official repository of aiXcoder-7B Code Large Language Model,https://github.com/aixcoder-plugin/aiXcoder-7B
+ai,,https://github.com/flutter/ai
+Swift-AI,The Swift machine learning library.,https://github.com/Swift-AI/Swift-AI
+crewAI-examples,A collection of examples that show how to use CrewAI framework to automate workflows.,https://github.com/crewAIInc/crewAI-examples
+AICoverGen,A WebUI to create song covers with any RVC v2 trained AI voice from YouTube videos or audio files.,https://github.com/SociallyIneptWeeb/AICoverGen
+machine-learning-engineering-for-production-public,Public repo for DeepLearning.AI MLEP Specialization,https://github.com/https-deeplearning-ai/machine-learning-engineering-for-production-public
+aicommits,A CLI that writes your git commit messages for you with AI,https://github.com/Nutlope/aicommits
+MoneyPrinterTurbo,利用AI大模型，一键生成高清短视频 Generate short videos with one click using AI LLM.,https://github.com/harry0703/MoneyPrinterTurbo
+awesome-ai-art-image-synthesis,"A list of awesome tools, ideas, prompt engineering tools, colabs, models, and helpers for the prompt designer playing with aiArt and image synthesis. Covers Dalle2, MidJourney, StableDiffusion, and open source tools.",https://github.com/altryne/awesome-ai-art-image-synthesis
+ell,A language model programming library.,https://github.com/MadcowD/ell
+susi_iOS,SUSI AI iOS app http://susi.ai,https://github.com/fossasia/susi_iOS
+datahub,The Metadata Platform for your Data and AI Stack,https://github.com/datahub-project/datahub
+aiexperiments-ai-duet,A piano that responds to you.,https://github.com/googlecreativelab/aiexperiments-ai-duet
+susi_linux,Hardware for SUSI AI https://susi.ai,https://github.com/fossasia/susi_linux
+serve,☁️ Build multimodal AI applications with cloud-native stack,https://github.com/jina-ai/serve
+bilingual_book_maker,Make bilingual epub books Using AI translate,https://github.com/yihong0618/bilingual_book_maker
+airllm,AirLLM 70B inference with single 4GB GPU,https://github.com/lyogavin/airllm
+openv0,AI generated UI components,https://github.com/raidendotai/openv0
+EvalAI,:cloud: :rocket: :bar_chart: :chart_with_upwards_trend: Evaluating state of the art in AI,https://github.com/Cloud-CV/EvalAI
+data-formulator,🪄 Create rich visualizations with AI ,https://github.com/microsoft/data-formulator
+AI-Optimizer,The next generation deep reinforcement learning tookit,https://github.com/TJU-DRL-LAB/AI-Optimizer
+AIDungeon,Infinite adventures await!,https://github.com/latitudegames/AIDungeon
+ai,Discover open-source projects on GitHub relevant to your skills (with ai).,https://github.com/open-sauced/ai
+awesome-generative-ai,A curated list of modern Generative Artificial Intelligence projects and services,https://github.com/steven2358/awesome-generative-ai
+ai-notes,"notes for software engineers getting up to speed on new AI developments. Serves as datastore for https://latent.space writing, and product brainstorming, but has cleaned up canonical references under the /Resources folder.",https://github.com/swyxio/ai-notes
+memfree,MemFree - Hybrid AI Search Engine & AI Page Generator,https://github.com/memfreeme/memfree
+airframe-react,Free Open Source High Quality Dashboard based on Bootstrap 4 & React 16: https://airframe-react-lime.vercel.app,https://github.com/0wczar/airframe-react
+AIOS,AIOS: AI Agent Operating System,https://github.com/agiresearch/AIOS
+KMS_VL_ALL_AIO,Smart Activation Script,https://github.com/abbodi1406/KMS_VL_ALL_AIO
+aichat,"All-in-one LLM CLI tool featuring Shell Assistant, Chat-REPL, RAG, AI Tools & Agents, with access to OpenAI, Claude, Gemini, Ollama, Groq, and more.",https://github.com/sigoden/aichat
+AI-System,System for AI Education Resource.,https://github.com/microsoft/AI-System
+plate,A rich-text editor powered by AI,https://github.com/udecode/plate
+ai-beehive,AI 蜂巢，基于 Java 使用 Spring Boot 3 和 JDK 17，支持的功能有 ChatGPT、OpenAi Image、Midjourney、NewBing、文心一言等等,https://github.com/hncboy/ai-beehive
+aind2-cnn,AIND Term 2 -- Lesson on Convolutional Neural Networks,https://github.com/udacity/aind2-cnn
+ai-toolkit,Various AI scripts. Mostly Stable Diffusion stuff.,https://github.com/ostris/ai-toolkit
+PraisonAI,"PraisonAI is a production-ready Multi AI Agents framework, designed to create AI Agents to automate and solve problems ranging from simple tasks to complex challenges. It provides a low-code solution to streamline the building and management of multi-agent LLM systems, emphasising simplicity, customisation, and effective human-agent collaboration.",https://github.com/MervinPraison/PraisonAI
+AI-Writer,AI 写小说，生成玄幻和言情网文等等。中文预训练生成模型。采用我的 RWKV 模型，类似 GPT-2 。AI写作。RWKV for Chinese novel generation.,https://github.com/BlinkDL/AI-Writer
+AICommand,ChatGPT integration with Unity Editor,https://github.com/keijiro/AICommand
+ai-agents-for-beginners,10 Lessons to Get Started Building AI Agents,https://github.com/microsoft/ai-agents-for-beginners
+novel,Notion-style WYSIWYG editor with AI-powered autocompletion.,https://github.com/steven-tey/novel
+imaginAIry,Pythonic AI generation of images and videos,https://github.com/brycedrennan/imaginAIry
+NarratoAI,利用AI大模型，一键解说并剪辑视频； Using AI models to automatically provide commentary and edit videos with a single click.,https://github.com/linyqh/NarratoAI
+AI_Tutorial,精选机器学习，NLP，图像识别， 深度学习等人工智能领域学习资料，搜索，推荐，广告系统架构及算法技术资料整理。算法大牛笔记汇总,https://github.com/cbamls/AI_Tutorial
+jQuery-menu-aim,jQuery plugin to fire events when user's cursor aims at particular dropdown menu items. For making responsive mega dropdowns like Amazon's.,https://github.com/kamens/jQuery-menu-aim
+AiyaEffectsAndroid,"宝宝特效Demo通过短视频SDK、直播SDK轻松实现特效与视频剪辑，为用户提供特效相机，拍摄辅助，自动美颜相机，抖音滤镜、直播礼物、直播贴纸等，超低占用空间，十秒大型场景仅100KB+， 精准人脸识别、人脸跟踪，支持3D特效，3D动画特效，2D特效、动画渲染、特效渲染等,  visual effects IOS demo, support 3D effect, 3D Animation, 2D effect",https://github.com/aiyaapp/AiyaEffectsAndroid
+AirMapView,A view abstraction to provide a map user interface with various underlying map providers,https://github.com/airbnb/AirMapView
+law-cn-ai,⚖️ AI 法律助手,https://github.com/lvwzhen/law-cn-ai
+AITemplate,AITemplate is a Python framework which renders neural network into high performance CUDA/HIP C++ code. Specialized for FP16 TensorCore (NVIDIA GPU) and MatrixCore (AMD GPU) inference.,https://github.com/facebookincubator/AITemplate
+mathAI,一个拍照做题程序。输入一张包含数学计算题的图片，输出识别出的数学计算式以及计算结果。This is a mathematic expression recognition project.,https://github.com/Roujack/mathAI
+airpal,Web UI for PrestoDB.,https://github.com/airbnb/airpal
+SnakeAI,Train a Neural Network to play Snake using a Genetic Algorithm,https://github.com/greerviau/SnakeAI
+metaflow,"Build, Deploy and Manage AI/ML Systems",https://github.com/Netflix/metaflow
+TagUI,Free RPA tool by AI Singapore,https://github.com/aisingapore/TagUI
+GenerativeAIExamples,Generative AI reference workflows optimized for accelerated infrastructure and microservice architecture.,https://github.com/NVIDIA/GenerativeAIExamples
+AISuperDomain,"Aila(AI超元域): The premier AI integration tool for Windows, macOS, and Android. Ask once, get answers from 10+ AIs like ChatGPT, Gemini, Claude3, Copilot, Poe, perplexity and more. Features customizable AI and prompts.",https://github.com/win4r/AISuperDomain
+ai_projects,AI projects,https://github.com/miguelgfierro/ai_projects
+ai-engineering-hub,,https://github.com/patchy631/ai-engineering-hub
+Vitis-AI,"Vitis AI is Xilinx’s development stack for AI inference on Xilinx hardware platforms, including both edge devices and Alveo cards.",https://github.com/Xilinx/Vitis-AI
+aim,Aim 💫 — An easy-to-use & supercharged open-source experiment tracker.,https://github.com/aimhubio/aim
+ai2thor,An open-source platform for Visual AI.,https://github.com/allenai/ai2thor
+practicalAI-cn,AI实战-practicalAI 中文版,https://github.com/MLEveryday/practicalAI-cn
+open-health,"OpenHealth, AI Health Assistant | Powered by Your Data",https://github.com/OpenHealthForAll/open-health
+self-hosted-ai-starter-kit,"The Self-hosted AI Starter Kit is an open-source template that quickly sets up a local AI environment. Curated by n8n, it provides essential tools for creating secure, self-hosted AI workflows.",https://github.com/n8n-io/self-hosted-ai-starter-kit
+Genesis,A generative world for general-purpose robotics & embodied AI learning.,https://github.com/Genesis-Embodied-AI/Genesis
+AIPND,Code and associated files for the AI Programming with Python Nanodegree Program,https://github.com/udacity/AIPND
+FlagAI,"FlagAI (Fast LArge-scale General AI models) is a fast, easy-to-use and extensible toolkit for large-scale model.",https://github.com/FlagAI-Open/FlagAI
+500-AI-Machine-learning-Deep-learning-Computer-vision-NLP-Projects-with-code,500 AI Machine learning Deep learning Computer vision NLP Projects with code,https://github.com/ashishpatel26/500-AI-Machine-learning-Deep-learning-Computer-vision-NLP-Projects-with-code
+aima-java,"Java implementation of algorithms from Russell And Norvig's ""Artificial Intelligence - A Modern Approach""",https://github.com/aimacode/aima-java
+ai-roadmap,ApacheCN AI 路线图（知识树）,https://github.com/apachecn/ai-roadmap
+airflow-tutorial,Apache Airflow tutorial,https://github.com/tuanavu/airflow-tutorial
+AiYaGirl,:fire: 爱吖妹纸（含 Kotlin 分支版本）——Retrofit + RxJava + MVP 架构 APP 体验代码家的干货集中营 Gank.io，福利多多，不容错过,https://github.com/nanchen2251/AiYaGirl
+docker-airflow,Docker Apache Airflow,https://github.com/puckel/docker-airflow
+ai-codereviewer,"AI Code Reviewer: Enhance your GitHub workflow with AI-powered code review! Get intelligent feedback and suggestions on pull requests using OpenAI's GPT-4 API, improving code quality and saving developers time.",https://github.com/aidar-freeed/ai-codereviewer
+julep,Serverless AI Workflows for Data & ML Teams,https://github.com/julep-ai/julep
+superagent,🥷 Run AI-agents with an API,https://github.com/superagent-ai/superagent
+atomic-agents,"Building AI agents, atomically",https://github.com/BrainBlend-AI/atomic-agents
+sweep,Sweep: AI coding assistant for JetBrains,https://github.com/sweepai/sweep
+KoboldAI-Client,"For GGUF support, see KoboldCPP: https://github.com/LostRuins/koboldcpp",https://github.com/KoboldAI/KoboldAI-Client
+simpleaichat,"Python package for easily interfacing with chat apps, with robust features and minimal code complexity.",https://github.com/minimaxir/simpleaichat
+AI-Job-Notes,AI算法岗求职攻略（涵盖准备攻略、刷题指南、内推和AI公司清单等资料）,https://github.com/amusi/AI-Job-Notes
+kornia,🐍 Geometric Computer Vision Library for Spatial AI,https://github.com/kornia/kornia
+MetaGPT,"🌟 The Multi-Agent Framework: First AI Software Company, Towards Natural Language Programming",https://github.com/geekan/MetaGPT
+lite.ai.toolkit,"🛠 A lite C++ toolkit of 100+ Awesome AI models, support ORT, MNN, NCNN, TNN and TensorRT. 🎉🎉",https://github.com/DefTruth/lite.ai.toolkit
+cookbook,Open-source AI cookbook,https://github.com/huggingface/cookbook
+morphic,An AI-powered search engine with a generative UI,https://github.com/miurla/morphic
+AIAlpha,Use unsupervised and supervised learning to predict stocks,https://github.com/VivekPa/AIAlpha
+Efficient-AI-Backbones,"Efficient AI Backbones including GhostNet, TNT and MLP, developed by Huawei Noah's Ark Lab.",https://github.com/huawei-noah/Efficient-AI-Backbones
+AI,"The ultimate list of resources to teach yourself how to use the latest AI tools, frameworks, and ideas.",https://github.com/emmethalm/AI
+jupyter-ai,A generative AI extension for JupyterLab,https://github.com/jupyterlab/jupyter-ai
+aiyprojects-raspbian," API libraries, samples, and system images for AIY Projects (Voice Kit and Vision Kit)",https://github.com/google/aiyprojects-raspbian
+openui,"OpenUI let's you describe UI using your imagination, then see it rendered live.",https://github.com/wandb/openui
+TaskingAI,The open source platform for AI-native application development.,https://github.com/TaskingAI/TaskingAI
+cofounder,"ai-generated apps , full stack + generative UI",https://github.com/raidendotai/cofounder
+h5ai,"HTTP web server index for Apache httpd, lighttpd and nginx.",https://github.com/lrsjng/h5ai
+aimet,AIMET is a library that provides advanced quantization and compression techniques for trained neural network models.,https://github.com/quic/aimet
+panda,code powering the comma.ai panda,https://github.com/commaai/panda
+ML-YouTube-Courses,📺 Discover the latest machine learning / AI courses on YouTube.,https://github.com/dair-ai/ML-YouTube-Courses
+aws-serverless-airline-booking,"Airline Booking is a sample web application that provides Flight Search, Flight Payment, Flight Booking and Loyalty points including end-to-end testing, GraphQL and CI/CD. This web application was the theme of Build on Serverless Season 2 on AWS Twitch running from April 24th until end of August in 2019.",https://github.com/aws-samples/aws-serverless-airline-booking
+ai,,https://github.com/Marshakut8dy9lWfi33i1dnynn/ai
+air-conditioner,❄️ Yun Portable Air Conditoner. 云空调，便携小空调，为你的夏日带去清凉！,https://github.com/YunYouJun/air-conditioner
+aimeos,"Integrated online shop based on Laravel 11 and the Aimeos e-commerce framework for ultra-fast online shops, scalable marketplaces, complex B2B applications and #gigacommerce",https://github.com/aimeos/aimeos
+yousan.ai,Awesome resources of yousan.ai(closely related to deep learning).,https://github.com/longpeng2008/yousan.ai
+aiva,AIVA (A.I. Virtual Assistant): General-purpose virtual assistant for developers.,https://github.com/kengz/aiva
+AI_Curriculum,"Open Deep Learning and Reinforcement Learning lectures from top Universities like Stanford, MIT, UC Berkeley.",https://github.com/Machine-Learning-Tokyo/AI_Curriculum
+ai-getting-started,"A Javascript AI getting started stack for weekend projects, including image/text models, vector stores, auth, and deployment configs",https://github.com/a16z-infra/ai-getting-started
+OpenAI,Swift community driven package for OpenAI public API,https://github.com/MacPaw/OpenAI
+feast,The Open Source Feature Store for AI/ML,https://github.com/feast-dev/feast
+god-level-ai,"A collection of scientific methods, processes, algorithms, and systems to build stories & models.",https://github.com/hemansnation/god-level-ai
+interviews.ai,"It is my belief that you, the postgraduate students and job-seekers for whom the book is primarily meant will benefit from reading it; however, it is my hope that even the most experienced researchers will find it fascinating as well.",https://github.com/BoltzmannEntropy/interviews.ai
+website-legacy-aio,All-in-one Holy Unblocker bundle,https://github.com/holy-unblocker/website-legacy-aio
+document.ai,基于向量数据库与GPT3.5的通用本地知识库方案(A universal local knowledge base solution based on vector database and GPT3.5),https://github.com/GanymedeNil/document.ai
+wav2letter,Facebook AI Research's Automatic Speech Recognition Toolkit ,https://github.com/flashlight/wav2letter
+AiEditor,AiEditor is a next-generation rich text editor for AI.,https://github.com/aieditor-team/AiEditor
+midscene,Let AI be your browser operator.,https://github.com/web-infra-dev/midscene
+TransmogrifAI,"TransmogrifAI (pronounced trăns-mŏgˈrə-fī) is an AutoML library for building modular, reusable, strongly typed machine learning workflows on Apache Spark with minimal hand-tuning",https://github.com/salesforce/TransmogrifAI
+gitingest,Replace 'hub' with 'ingest' in any github url to get a prompt-friendly extract of a codebase ,https://github.com/cyclotruc/gitingest
+AiNiee,一款专注于Ai翻译的工具，可以用来一键自动翻译RPG SLG游戏，Epub Word TXT小说，Srt Vtt Lrc字幕等等。,https://github.com/NEKOparapa/AiNiee
+aiac,Artificial Intelligence Infrastructure-as-Code Generator.,https://github.com/gofireflyio/aiac
+ai-code-translator,Use AI to translate code from one language to another.,https://github.com/mckaywrigley/ai-code-translator
+AI,Repository for artificial intelligence programs. The programs in this repository will vary on the programming language and the subjects. The code is really neat and specific.,https://github.com/flovera1/AI
+photoprism,AI-Powered Photos App for the Decentralized Web 🌈💎✨,https://github.com/photoprism/photoprism
+AirChat,Free Communications For Everyone.,https://github.com/lulzlabs/AirChat
+ai-fundamentals,Code samples for AI fundamentals,https://github.com/MicrosoftDocs/ai-fundamentals
+airplay2-receiver,AirPlay 2 Receiver - Python implementation,https://github.com/openairplay/airplay2-receiver
+ai-agents-masterclass,Follow along with my AI Agents Masterclass videos! All of the code I create and use in this series on YouTube will be here for you to use and even build on top of!,https://github.com/coleam00/ai-agents-masterclass
+awful-ai,😈Awful AI is a curated list to track current scary usages of AI - hoping to raise awareness,https://github.com/daviddao/awful-ai
+musegan,An AI for Music Generation,https://github.com/salu133445/musegan
+AppFlowy,"Bring projects, wikis, and teams together with AI. AppFlowy is the AI collaborative workspace where you achieve more without losing control of your data. The leading open source Notion alternative.",https://github.com/AppFlowy-IO/AppFlowy
+krita-ai-diffusion,"Streamlined interface for generating images with AI in Krita. Inpaint and outpaint with optional text prompt, no tweaking required.",https://github.com/Acly/krita-ai-diffusion
+simple-chess-ai,A simple chess AI,https://github.com/lhartikk/simple-chess-ai
+system-prompts-and-models-of-ai-tools,,https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools
+vault-ai,"OP Vault ChatGPT: Give ChatGPT long-term memory using the OP Stack (OpenAI + Pinecone Vector Database). Upload your own custom knowledge base files (PDF, txt, epub, etc) using a simple React frontend.",https://github.com/pashpashpash/vault-ai
+AirGuard,Protect yourself from being tracked 🌍 by AirTags 🏷 and Find My accessories 📍,https://github.com/seemoo-lab/AirGuard
+uTensor,TinyML AI inference library,https://github.com/uTensor/uTensor
+AIRAVAT,A multifunctional Android RAT with GUI based Web Panel without port forwarding.,https://github.com/Th30neAnd0nly/AIRAVAT
+aibrix,Cost-efficient and pluggable Infrastructure components for GenAI inference,https://github.com/vllm-project/aibrix
+civitai,"A repository of models, textual inversions, and more",https://github.com/civitai/civitai
+GameAISDK,基于图像的游戏AI自动化框架,https://github.com/Tencent/GameAISDK
+lab,A customisable 3D platform for agent-based AI research,https://github.com/google-deepmind/lab
+ContosoAir,Source code repository for ContosoAir application ,https://github.com/microsoft/ContosoAir
+AI-900-AIFundamentals,Includes labs for AI Fundamentals. ,https://github.com/MicrosoftLearning/AI-900-AIFundamentals
+BotSharp,AI Multi-Agent Framework in .NET,https://github.com/SciSharp/BotSharp
+ai-chatbot-framework,A python chatbot framework with Natural Language Understanding and Artificial Intelligence.,https://github.com/alfredfrancis/ai-chatbot-framework
+EmbedAI,"An app to interact privately with your documents using the power of GPT, 100% privately, no data leaks",https://github.com/SamurAIGPT/EmbedAI
+Reinforcement-learning-with-tensorflow,"Simple Reinforcement learning tutorials, 莫烦Python 中文AI教学",https://github.com/MorvanZhou/Reinforcement-learning-with-tensorflow
+HivisionIDPhotos,⚡️HivisionIDPhotos: a lightweight and efficient AI ID photos tools. 一个轻量级的AI证件照制作算法。,https://github.com/Zeyi-Lin/HivisionIDPhotos
+deeplearning.ai,Some work of Andrew Ng's course on Coursera,https://github.com/JudasDie/deeplearning.ai
+marvin,✨ AI agents that spark joy,https://github.com/PrefectHQ/marvin
+AI-Crash-Course,AI Crash Course to help busy builders catch up to the public frontier of AI research in 2 weeks,https://github.com/henrythe9th/AI-Crash-Course
+awesome-ai-residency,List of AI Residency Programs,https://github.com/dangkhoasdc/awesome-ai-residency
+Wechat_AutoJump,AI plays WeChat Jump Game,https://github.com/Prinsphield/Wechat_AutoJump
+Awesome-AITools,Collection of AI-related utilities. Welcome to submit issues and pull requests /收藏AI相关的实用工具，欢迎提交issues 或者pull requests,https://github.com/ikaijua/Awesome-AITools
+snake-ai,"An AI agent that beats the classic game ""Snake"".",https://github.com/linyiLYi/snake-ai
+aifh,Artificial Intelligence for Humans,https://github.com/jeffheaton/aifh
+AimRT,A high-performance runtime framework for modern robotics.,https://github.com/AimRT/AimRT
+poker_ai,🤖 An Open Source Texas Hold'em AI,https://github.com/fedden/poker_ai
+AiPy,Python机器学习、深度学习算法开发等学习资源分享,https://github.com/aialgorithm/AiPy
+NeMo,"A scalable generative AI framework built for researchers and developers working on Large Language Models, Multimodal, and Speech AI (Automatic Speech Recognition and Text-to-Speech)",https://github.com/NVIDIA/NeMo
+aiwallpaper,AI Wallpaper Generator,https://github.com/all-in-aigc/aiwallpaper
+qrbtf,AI & parametric QR code generator. AI & 参数化二维码生成器。https://qrbtf.com,https://github.com/latentcat/qrbtf
+deeplake,"Database for AI. Store Vectors, Images, Texts, Videos, etc. Use with LLMs/LangChain. Store, query, version, & visualize any AI data. Stream data in real-time to PyTorch/TensorFlow. https://activeloop.ai",https://github.com/activeloopai/deeplake
+lollms-webui,Lord of Large Language and Multi modal Systems Web User Interface,https://github.com/ParisNeo/lollms-webui
+aide,The open-source AI-native IDE,https://github.com/codestoryai/aide
+LayaAir,LayaAir is a fully platform rendering engine with rich 2D/3D rendering capabilities and a mature integrated development platform,https://github.com/layabox/LayaAir
+generative-ai-docs,Documentation for Google's Gen AI site - including the Gemini API and Gemma,https://github.com/google/generative-ai-docs
+pywit,Python library for Wit.ai,https://github.com/wit-ai/pywit
+DeepBI,"LLM based data scientist, AI native data application.  AI-driven infinite thinking redefines BI.",https://github.com/DeepInsight-AI/DeepBI
+awesome-apache-airflow,Curated list of resources about Apache Airflow,https://github.com/jghoman/awesome-apache-airflow
+TavernAI,"Atmospheric adventure chat for AI language models (KoboldAI, NovelAI, Pygmalion, OpenAI chatgpt, gpt-4)",https://github.com/TavernAI/TavernAI
+Deep-Learning-Coursera,"Deep Learning Specialization by Andrew Ng, deeplearning.ai.",https://github.com/enggen/Deep-Learning-Coursera
+node-wit,Node.js SDK for Wit.ai,https://github.com/wit-ai/node-wit
+dlcourse_ai,Материалы курса Deep Learning на пальцах,https://github.com/sim0nsays/dlcourse_ai
+AirSLAM,🚀 AirVO upgrades to AirSLAM [TRO]🚀,https://github.com/sair-lab/AirSLAM
+airbrake,The official Airbrake library for Ruby applications,https://github.com/airbrake/airbrake
+fairseq-lua,Facebook AI Research Sequence-to-Sequence Toolkit,https://github.com/facebookresearch/fairseq-lua
+aie-book,"[WIP] Resources for AI engineers. Also contains supporting materials for the book AI Engineering (Chip Huyen, 2025)",https://github.com/chiphuyen/aie-book
+letta,Letta (formerly MemGPT) is a framework for creating LLM services with memory.,https://github.com/letta-ai/letta
+open-ai,"OpenAI PHP SDK : Most downloaded, forked, contributed, huge community supported, and used PHP (Laravel , Symfony, Yii, Cake PHP or any PHP framework) SDK for OpenAI GPT-3 and DALL-E. It also supports chatGPT-like streaming. (ChatGPT AI is supported)",https://github.com/orhanerday/open-ai
+AI,,https://github.com/StudioTV/AI
+aidea-server,AIdea 是一款支持 GPT  以及国产大语言模型通义千问、文心一言等，支持 Stable Diffusion 文生图、图生图、 SDXL1.0、超分辨率、图片上色的全能型 APP。,https://github.com/mylxsw/aidea-server
+aigcpanel,AigcPanel 是一个简单易用的一站式AI数字人系统，支持视频合成、声音合成、声音克隆，简化本地模型管理、一键导入和使用AI模型。,https://github.com/modstart-lib/aigcpanel
+aima-exercises,Exercises for the book Artificial Intelligence: A Modern Approach,https://github.com/aimacode/aima-exercises
+airtable.js,Airtable javascript client,https://github.com/Airtable/airtable.js
+mesop,Rapidly build AI apps in Python,https://github.com/google/mesop
+cognee,Reliable LLM Memory for AI Applications and AI Agents,https://github.com/topoteretes/cognee
+pocketpal-ai,An app that brings language models directly to your phone.,https://github.com/a-ghorbani/pocketpal-ai
+LLMs-in-Finance,LLMs in Finance - Generative AI - AI Agents ,https://github.com/hananedupouy/LLMs-in-Finance
+fiftyone,Refine high-quality datasets and visual AI models,https://github.com/voxel51/fiftyone
+AiQiangGUO,Ai强国 基于Autojs实现的模拟点击学习强国辅助工具 适配安卓,https://github.com/zhuxuedefeng/AiQiangGUO
+Python-ai-assistant,Python AI assistant 🧠,https://github.com/ggeop/Python-ai-assistant
+Girls-In-AI,免费学代码系列：小白python入门、数据分析data analyst、机器学习machine learning、深度学习deep learning、kaggle实战,https://github.com/girls-in-ai/Girls-In-AI
+sharegpt,Easily share permanent links to ChatGPT conversations with your friends,https://github.com/domeccleston/sharegpt
+Airplay-SDK,The Best Airplay SDK supports Airplay Mirroring and AirPlay Casting to a receiver device. ,https://github.com/xfirefly/Airplay-SDK
+whatsapp-chatgpt,ChatGPT + DALL-E + WhatsApp = AI Assistant :rocket: :robot:,https://github.com/askrella/whatsapp-chatgpt
+pyspur,AI Agent Builder in Python,https://github.com/PySpur-Dev/pyspur
+airsonos,:musical_note: AirPlay to Sonos,https://github.com/stephen/airsonos
+trustworthyAI,Trustworthy AI related projects,https://github.com/huawei-noah/trustworthyAI
+ai2html,A script for Adobe Illustrator that converts your Illustrator artwork into an html page.,https://github.com/newsdev/ai2html
+SWIFT-AI,A fast gigapixel processing system,https://github.com/liwenxi/SWIFT-AI
+cortex.cpp,Local AI API Platform,https://github.com/janhq/cortex.cpp
+x,Craft AI-driven interfaces effortlessly 🤖,https://github.com/ant-design/x
+AIGenerateCode,Android谷歌上架马甲包垃圾代码混淆,https://github.com/520CCC/AIGenerateCode
+AirPodsDesktop,"☄️ AirPods desktop user experience enhancement program, for Windows and Linux (WIP)",https://github.com/SpriteOvO/AirPodsDesktop
+twitterbio,Generate your Twitter bio with AI,https://github.com/Nutlope/twitterbio
+AI-on-the-edge-device,"Easy to use device for connecting ""old"" measuring units (water, power, gas, ...) to the digital world",https://github.com/jomjol/AI-on-the-edge-device
+ai,Artificial Intelligence Fundamental Concepts,https://github.com/farrokhkarimi/ai
+semantic-kernel,Integrate cutting-edge LLM technology quickly and easily into your apps,https://github.com/microsoft/semantic-kernel
+Instagram-AI-Agent,"Instagram Ai Agent 🌸 is built using Node.js and TypeScript 🛠️, designed for seamless job execution 📸. It's lightweight, efficient, and still evolving 🚧—exciting new features coming soon! 🌟",https://github.com/David-patrick-chuks/Instagram-AI-Agent
