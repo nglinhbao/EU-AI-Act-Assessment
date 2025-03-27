@@ -68,15 +68,22 @@ def combine_features(texts, word2vec_model, word2vec_words, use_model):
     
     return hstack((tfidf_features, use_features, w2v_features))
 
-def evaluate(df):
+def evaluate(file_path):
     tf.config.set_visible_devices([], 'GPU')
     """Predict fairness scores and calculate accuracy."""
+    
+    # Load CSV
+    df = pd.read_csv(file_path)
+    
+    # Drop or fill NaNs in 'content'
+    df['content'] = df['content'].fillna('')  # or use df.dropna(subset=['content']) if you prefer dropping
+    
     # Load models
     word2vec_model, word2vec_words, classifier_model, use_model = load_models()
     
     # Process features
     x_processed = combine_features(
-        df['Reason'].tolist(),
+        df['content'].tolist(),
         word2vec_model,
         word2vec_words,
         use_model
@@ -85,18 +92,13 @@ def evaluate(df):
     # Get probability predictions
     fairness_scores = classifier_model.predict_proba(x_processed)[:, 1]
     
-    # Calculate accuracy
-    if 'Predicted System Type' in df.columns and 'System Type' in df.columns:
-        accuracy = (df['Predicted System Type'] == df['System Type']).mean()
-        print(f"Accuracy: {accuracy:.4f}")
-    else:
-        accuracy = None
-    
-    # Add Fairness score and accuracy columns to df
+    # Add Fairness score to df
     df['Fairness Score'] = fairness_scores
 
-    df.to_csv('datasets/evaluated_results.csv', index=False)
+    # Save to the same file
+    df.to_csv(file_path, index=False)
     
     return df
 
-evaluate(pd.read_csv('datasets/results.csv'))
+# Call the function with the original file path
+evaluate('datasets/ai_app_reviews.csv')
