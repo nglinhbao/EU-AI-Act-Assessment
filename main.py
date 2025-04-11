@@ -2,8 +2,9 @@ import pandas as pd
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 import os
-from evaluation import evaluate
+# from evaluation import evaluate
 import re
+from fairness_scoring import evaluate_app_fairness, load_models
 
 def get_system_description(txt_file_path):
     if not os.path.isfile(txt_file_path):
@@ -67,9 +68,47 @@ def query_llama(model, tokenizer, system_description, prompt):
             "reasoning": "Error occurred while parsing response."
         }
 
+def check_inconsistency(row, model, tokenizer):
+    difference_analysis = row['Difference Analysis']
+
+    base_prompt = """
+        Are Promised Features and User Reviews inconsistent?
+
+        Answer the question only with 'Yes' or 'No'
+
+        Template:
+        Answer: [Yes/No]
+        """
+
+    full_prompt = difference_analysis + base_prompt
+
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+    inputs = tokenizer(full_prompt, return_tensors="pt").to(device)
+    outputs = model.generate(**inputs, max_new_tokens=200)
+    response = tokenizer.decode(outputs[0], skip_special_tokens=True).strip()
+
+    # Use regex to extract the answer after "Answer:"
+    match = re.search(r"Answer:\s*(Yes|No)", response, re.IGNORECASE)
+    if match:
+        return match.group(1).strip().lower() == "yes"
+    else:
+        print("Unexpected model response:", response)
+        return None
+
 def perform_classification(row, model, tokenizer, prompts_df, viz=True):
-    # Create detailed input description
-    input_description = f"{row['AI System Description']}. It uses {row['Input Data Type']}. The system functions include: {row['System Functions']}. Benefits of Commercial Use: {row['Benefits of Commercial Use']}. Assumptions/Consents Regarding Data Usage: {row['Assumptions/Consents Regarding Data Usage']}"
+    input_description = (
+        f"{row['Full Description']}. "
+        f"Additional app information: {row['App Info Modal']}. "
+        f"Data shared with third parties: {row['Shared Data']}. "
+        f"Data collected by the app: {row['Collected Data']}. "
+        f"Security practices: {row['Security Practices']}."
+    )
+
+    word2vec_model, word2vec_words, classifier_model, use_model = load_models()
+
+    if check_inconsistency(row, model, tokenizer):
+        if evaluate_app_fairness(row["App Name"], word2vec_model, word2vec_words, classifier_model, use_model) > 0.4:
+            input_description += f"User reviews: {row['User Review Analysis']}."
     
     base_prompt = """
         Answer the question with 'Yes' or 'No'
@@ -118,17 +157,17 @@ def perform_classification(row, model, tokenizer, prompts_df, viz=True):
     }
 
 def main():
-    csv_file_path = './datasets/ai_risk_prompts.csv'
+    csv_file_path = '/content/drive/MyDrive/EU-AI-Act/datasets/ai_risk_prompts.csv'
     model_name = "TheBloke/Nous-Hermes-Llama2-GPTQ"
     # model_name = "meta-llama/Llama-2-7b-hf"
 
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     model = AutoModelForCausalLM.from_pretrained(model_name, torch_dtype=torch.float16, device_map="auto")
     
-    synthetic_dataset = './datasets/sample.csv'
+    synthetic_dataset = '/content/drive/MyDrive/EU-AI-Act/datasets/app_reviews_analysis.csv'
     df = retrive_information_from_csv(synthetic_dataset)
 
-    prompts_df = pd.read_csv("./datasets/ai_risk_prompts.csv")
+    prompts_df = pd.read_csv("/content/drive/MyDrive/EU-AI-Act/datasets/ai_risk_prompts.csv")
     
     # Apply classification and extract results
     results = df.apply(lambda row: perform_classification(row, model, tokenizer, prompts_df), axis=1)
@@ -137,13 +176,13 @@ def main():
     df['Predicted System Type'] = results.apply(lambda x: x['risk_type'])
     df['Reason'] = results.apply(lambda x: x['reasoning'])
 
-    df = evaluate(df)
+    # df = evaluate(df)
     #a
 
-    df.to_csv('datasets/results.csv', index=False)
+    df.to_csv('/content/drive/MyDrive/EU-AI-Act/datasets/results.csv', index=False)
 
-    print(f"Accuracy: {df['Accuracy']:.2f}")
-    print(f"Fairness Score: {df['Fairness Score']:.2f}")
+    # print(f"Accuracy: {df['Accuracy']:.2f}")
+    # print(f"Fairness Score: {df['Fairness Score']:.2f}")
 
 if __name__ == "__main__":
     main()

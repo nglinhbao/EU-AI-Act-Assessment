@@ -6,6 +6,7 @@ from langchain_community.vectorstores import FAISS
 import os
 # from evaluation import evaluate
 import re
+from fairness_scoring import evaluate_app_fairness, load_models
 
 def get_system_description(txt_file_path):
     if not os.path.isfile(txt_file_path):
@@ -28,7 +29,7 @@ def retrive_information_from_csv(file_name):
         print(f"Error reading the CSV file: {e}")
         return None
 
-def get_vector_db(risk_type, db_dir='./vector_db'):
+def get_vector_db(risk_type, db_dir='/content/drive/MyDrive/EU-AI-Act/vector_db'):
     """
     Load the vector database for a specific risk type with safe deserialization.
     """
@@ -69,6 +70,7 @@ def query_llama(model, tokenizer, system_description, prompt):
     try:        
         # Extract the second "Answer: "
         answer_parts = response.split("Answer: ")
+        print(answer_parts)
         if len(answer_parts) < 3:  # Ensure we have at least two answers
             return {"score": 0.5, "reasoning": "Failed to find second answer"}
         
@@ -100,9 +102,47 @@ def query_llama(model, tokenizer, system_description, prompt):
             "reasoning": "Error occurred while parsing response."
         }
 
-def perform_classification(row, model, tokenizer, viz=True):
-    # Create detailed input description
-    input_description = f"{row['AI System Description']}. It uses {row['Input Data Type']}. The system functions include: {row['System Functions']}. Benefits of Commercial Use: {row['Benefits of Commercial Use']}. Assumptions/Consents Regarding Data Usage: {row['Assumptions/Consents Regarding Data Usage']}"
+def check_inconsistency(row, model, tokenizer):
+    import torch
+
+    difference_analysis = row['Difference Analysis']
+
+    base_prompt = """
+        Are Promised Features and User Reviews inconsistent?
+
+        Answer the question only with 'Yes' or 'No'
+
+        Template:
+        Answer:
+        """
+
+    full_prompt = difference_analysis + base_prompt
+
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+    inputs = tokenizer(full_prompt, return_tensors="pt").to(device)
+    outputs = model.generate(**inputs, max_new_tokens=200)
+    response = tokenizer.decode(outputs[0], skip_special_tokens=True).strip()
+    print(response)
+    # Extract answer after "Answer:"
+    if "Answer:" in response:
+        answer = response.split("Answer:")[-1].strip().split()[0]
+        print(answer)
+        return answer.lower() == "yes"
+    return False
+
+
+def perform_classification(row, model, tokenizer, word2vec_model, word2vec_words, classifier_model, use_model, viz=True):
+    input_description = (
+        f"{row['Full Description']}. "
+        f"Additional app information: {row['App Info Modal']}. "
+        f"Data shared with third parties: {row['Shared Data']}. "
+        f"Data collected by the app: {row['Collected Data']}. "
+        f"Security practices: {row['Security Practices']}."
+    )
+
+    if check_inconsistency(row, model, tokenizer):
+        if evaluate_app_fairness(row["App Name"], word2vec_model, word2vec_words, classifier_model, use_model) >= 0.1:
+            input_description += f"User reviews: {row['User Review Analysis']}."
     
     base_prompt = """
         Answer the question with 'Yes' or 'No'
@@ -133,8 +173,8 @@ def perform_classification(row, model, tokenizer, viz=True):
             
             if viz:
                 print(f"Risk Type: {risk_type}")
-                print(f"Prompt: {prompt_text}")
-                print(f"App description: {input_description}")
+                # print(f"Prompt: {prompt_text}")
+                # print(f"App description: {input_description}")
                 print(f"Score: {response['score']}")
                 print(f"Reasoning: {response['reasoning']}\n")
                 
@@ -161,18 +201,20 @@ def perform_classification(row, model, tokenizer, viz=True):
     }
 
 def main():
-    csv_file_path = './datasets/ai_risk_prompts.csv'
-    model_name = "TheBloke/Nous-Hermes-Llama2-GPTQ"
+    csv_file_path = '/content/drive/MyDrive/EU-AI-Act/datasets/ai_risk_prompts.csv'
+    model_name = "mistralai/Mistral-7B-Instruct-v0.3"
     # model_name = "meta-llama/Llama-2-7b-hf"
 
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     model = AutoModelForCausalLM.from_pretrained(model_name, torch_dtype=torch.float16, device_map="auto")
     
-    synthetic_dataset = './datasets/small_sample.csv'
+    synthetic_dataset = '/content/drive/MyDrive/EU-AI-Act/datasets/app_reviews_analysis.csv'
     df = retrive_information_from_csv(synthetic_dataset)
+
+    word2vec_model, word2vec_words, classifier_model, use_model = load_models()
     
     # Apply classification and extract results
-    results = df.apply(lambda row: perform_classification(row, model, tokenizer), axis=1)
+    results = df.apply(lambda row: perform_classification(row, model, tokenizer, word2vec_model, word2vec_words, classifier_model, use_model), axis=1)
     
     # Assign risk type, score, and reasoning to separate columns
     # df['Confidence Score'] = results.apply(lambda x: x['confidence_score'])
@@ -181,7 +223,7 @@ def main():
 
     # df = evaluate(df)
 
-    df.to_csv('datasets/results.csv', index=False)
+    df.to_csv('/content/drive/MyDrive/EU-AI-Act/datasets/results.csv', index=False)
 
     # print(f"Accuracy: {df['Accuracy']:.2f}")
     # print(f"Fairness Score: {df['Fairness Score']:.2f}")
