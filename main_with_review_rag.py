@@ -34,7 +34,7 @@ def get_review_vector_db(app_name, db_dir='./vector_db'):
     """
     embeddings = HuggingFaceEmbeddings(
         model_name="sentence-transformers/all-mpnet-base-v2",
-        model_kwargs={'device': 'cpu'}
+        model_kwargs={'device': 'cuda'}
     )
     
     safe_name = app_name.lower().replace(' ', '_').replace(':', '_')
@@ -194,7 +194,8 @@ def perform_classification(row, model, tokenizer, prompts_df, viz=True):
     """
 
     # Initialize tracking variables
-    risk_types = ["Unacceptable Risk", "High Risk", "Limited Risk", "Minimal Risk"]
+    # Removed "Minimal Risk" as it's no longer in the prompts
+    risk_types = ["Unacceptable risk", "High risk", "Limited risk"]
     current_reasoning = ""
     
     # Process each risk type
@@ -229,49 +230,43 @@ def perform_classification(row, model, tokenizer, prompts_df, viz=True):
                     return {
                         'risk_type': risk_type,
                         'confidence_score': confidence_score,
-                        'reasoning': current_reasoning
+                        'all_reasoning': current_reasoning,
+                        'current_reasoning': response['reasoning']
                     }
-                
-        # For minimal risk, we don't continue to lower risk levels
-        if risk_type == "Minimal Risk":
-            break
     
-    # Default to minimal risk if no clear classification was made
+    # If we've processed all risk types and found no classification,
+    # default to minimal risk
     return {
         'risk_type': "Minimal Risk",
-        'confidence_score': confidence_score if 'confidence_score' in locals() else 0,
-        'reasoning': current_reasoning if current_reasoning else "No specific risks identified."
+        'confidence_score': 0,  # Default confidence since we're using it as fallback
+        'all_reasoning': current_reasoning if current_reasoning else "No specific risks identified in the higher risk categories.",
+        'current_reasoning': ""
     }
 
 def main():
-    csv_file_path = './datasets/ai_risk_prompts.csv'
+    questions = './datasets/EU_AI_Act_Assessment_Questions.csv'
     model_name = "mistralai/Mistral-7B-Instruct-v0.3"
 
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     model = AutoModelForCausalLM.from_pretrained(model_name, torch_dtype=torch.float16, device_map="auto")
     
-    synthetic_dataset = './datasets/app_reviews_analysis.csv'
+    synthetic_dataset = './datasets/full_dataset/AI_apps_full_dataset.csv'
     df = retrive_information_from_csv(synthetic_dataset)
 
     # Load all prompts from CSV
-    prompts_df = pd.read_csv(csv_file_path)
+    prompts_df = pd.read_csv(questions)
     
-    # Load models for fairness evaluation
-    # word2vec_model, word2vec_words, classifier_model, use_model = load_models()
-    
-    # Apply classification and extract results
-    results = df.apply(
-        lambda row: perform_classification(
-            row, model, tokenizer, prompts_df
-        ), 
-        axis=1
-    )
-    
-    # Assign risk type and reasoning to separate columns
-    df['Predicted System Type'] = results.apply(lambda x: x['risk_type'])
-    df['Reason'] = results.apply(lambda x: x['reasoning'])
+    # Prepare the output file
+    output_file = './datasets/results.csv'
+    with open(output_file, 'w') as f:
+        # Write the header
+        f.write("App Name;Predicted System Type;All Reasoning;Current Reasoning\n")
 
-    df.to_csv('./datasets/results.csv', index=False)
+    # Process each row and save results on the fly
+    for _, row in df.iterrows():
+        result = perform_classification(row, model, tokenizer, prompts_df)
+        with open(output_file, 'a') as f:
+            f.write(f"{row['App Name']};{result['risk_type']};{result['all_reasoning']};{result['current_reasoning']}\n")
 
 if __name__ == "__main__":
     main()

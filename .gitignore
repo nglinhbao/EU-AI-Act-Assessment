@@ -1,5 +1,6 @@
 .kaggle
-./vector_db
+vector_db
 GoogleNews-vectors-negative300.bin
 ai_act.sif
 .env
+datasets/full_dataset/corresponding_reviews.csv

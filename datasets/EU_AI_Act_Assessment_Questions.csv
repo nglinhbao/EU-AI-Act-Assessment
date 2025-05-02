@@ -1,0 +1,69 @@
+Type,Prompt
+Unacceptable risk,Does the AI system deploy subliminal techniques that act beyond a user’s conscious perception?
+Unacceptable risk,Is the system designed to manipulate or deceive users in ways that could materially distort their behaviour?
+Unacceptable risk,Could the system appreciably impair an individual’s ability to make an informed decision about a consequential action?
+Unacceptable risk,"Is the AI intended to cause, or is it reasonably likely to cause, significant harm through behavioural manipulation?"
+Unacceptable risk,"Does the system exploit vulnerabilities related to a person’s age (e.g., children or the elderly)?"
+Unacceptable risk,Does the system exploit vulnerabilities related to a person’s disability?
+Unacceptable risk,Does the system exploit vulnerabilities tied to a person’s specific social or economic situation?
+Unacceptable risk,Could exploiting any such vulnerability materially distort the behaviour of those individuals?
+Unacceptable risk,Does the AI evaluate or classify people over time based on their social behaviour to generate a “social score”?
+Unacceptable risk,Could that social score lead to unfavourable treatment in contexts unrelated to where the underlying data were collected?
+Unacceptable risk,Could the social scoring result in treatment that is unjustified or disproportionate to the assessed behaviour?
+Unacceptable risk,Is the system used to predict or assess the risk that a person will commit a criminal offence based solely on profiling or personality traits?
+Unacceptable risk,Does the AI create or expand facial-recognition databases by scraping facial images from the internet without targeted consent?
+Unacceptable risk,Does the AI create or expand facial-recognition databases by scraping CCTV footage without targeted consent?
+Unacceptable risk,Is the system used to infer emotions of individuals in workplaces?
+Unacceptable risk,Is the system used to infer emotions of individuals in educational institutions?
+Unacceptable risk,"Does the AI categorise people’s biometric data to infer sensitive attributes such as race, political opinions, or religious beliefs?"
+Unacceptable risk,Does the system categorise biometric data to infer sex life or sexual orientation of individuals?
+Unacceptable risk,Is the AI a “real-time” remote biometric identification system intended for use in publicly accessible spaces by law-enforcement authorities?
+Unacceptable risk,"If used by law enforcement, is the system intended to identify individuals without a prior, specific judicial or administrative authorisation?"
+High risk,Is the AI system a remote biometric identification tool used to recognise individuals at a distance?
+High risk,"Does the system categorise people by sensitive attributes inferred from biometric data, such as race or religion?"
+High risk,"Does the AI analyse faces, voices, or other signals to recognise or interpret emotions?"
+High risk,"Is the AI a safety component for managing critical digital infrastructure (e.g., data centres, cloud networks)?"
+High risk,Is the AI a safety component for managing or controlling road traffic systems?
+High risk,"Is the AI a safety component in water, gas, heating, or electricity supply networks?"
+High risk,Does the AI decide admission or access for students to educational or vocational institutions?
+High risk,Does the system evaluate learning outcomes to steer or adapt a learner’s path?
+High risk,Does the AI assess which education level an individual will receive or can access?
+High risk,Is the system used to monitor or detect prohibited behaviour during student examinations?
+High risk,Does the AI place targeted job advertisements to recruit or select candidates?
+High risk,Is the system used to filter or analyse job applications or résumés for hiring decisions?
+High risk,"Does the AI decide promotions, task allocation, or terminations in employment relationships?"
+High risk,Does the system monitor or evaluate employee performance or behaviour at work?
+High risk,Is the AI used by public authorities to decide eligibility for public assistance benefits or healthcare services?
+High risk,"Does the AI grant, reduce, revoke, or reclaim public benefits or services?"
+High risk,Is the system used to evaluate an individual’s creditworthiness or to generate a credit score?
+High risk,Does the AI set risk or pricing for life or health insurance for individuals?
+High risk,Is the system used to classify emergency calls or prioritise emergency-response dispatch?
+High risk,Does the AI triage patients in emergency healthcare settings?
+High risk,Is the AI used by law-enforcement authorities to assess a person’s risk of becoming a crime victim?
+High risk,Is the system used by law-enforcement as a polygraph or lie-detection tool?
+High risk,Does the AI evaluate the reliability of evidence during criminal investigations or prosecutions?
+High risk,Is the system used by law-enforcement to assess the likelihood of a person offending or re-offending?
+High risk,"Does the AI profile individuals during the detection, investigation, or prosecution of crimes?"
+High risk,Is the system used by migration or border authorities as a polygraph or similar tool?
+High risk,"Does the AI assess security, irregular-migration, or health risks of persons entering the EU?"
+High risk,"Is the system used to assist authorities in processing asylum, visa, or residence-permit applications?"
+High risk,"Does the AI detect, recognise, or identify persons for migration, asylum, or border-control purposes (beyond document checks)?"
+High risk,"Is the AI used by judges or courts to research facts, interpret law, or apply law to specific cases?"
+High risk,Is the system used in alternative dispute resolution to help decide on facts or law?
+High risk,Does the AI aim to influence voting behaviour or the outcome of an election or referendum by exposing voters to tailored outputs?
+Limited risk,Does the AI system interact directly with users in a way that might not be obviously automated to an observant person?
+Limited risk,Is the system designed to alert users that they are engaging with an AI at the start of the interaction?
+Limited risk,"Does the AI generate synthetic text, images, audio, or video content that alters the original input or its semantics?"
+Limited risk,Are the system’s synthetic outputs automatically tagged in a machine-readable format as artificially generated or manipulated?
+Limited risk,"Does the AI perform only standard, non-substantial editing functions on user-supplied content?"
+Limited risk,Does the system include an emotion-recognition capability applied to individuals?
+Limited risk,Does the system include biometric categorisation that assigns people to groups based on inferred attributes?
+Limited risk,Are individuals exposed to emotion recognition or biometric categorisation informed that such processing is taking place?
+Limited risk,"Does the AI system create or manipulate “deep-fake” images, audio, or video content?"
+Limited risk,Is there a clear disclosure to viewers that deep-fake media from the system has been artificially generated or altered?
+Limited risk,Does the AI generate text intended for publication on matters of public interest without subsequent human editorial control?
+Limited risk,Is there a disclosure accompanying AI-generated public-interest text indicating its artificial origin?
+Limited risk,Are any transparency notices provided in an accessible format at the first point of user interaction?
+Limited risk,Does the deployer rely on a legal exemption for law-enforcement use that removes the need for public disclosure?
+Limited risk,"Has the provider implemented an interoperable, robust, and reliable method for marking synthetic content?"
+Limited risk,Are personal data processed by the emotion-recognition or biometric-categorisation functions in compliance with GDPR and related EU data-protection laws?
