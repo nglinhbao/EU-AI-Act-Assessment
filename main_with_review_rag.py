@@ -93,9 +93,63 @@ def query_llama(model, tokenizer, system_description, prompt):
     device = "cuda" if torch.cuda.is_available() else "cpu"
     combined_input = f"System Description: {system_description}\n\nPrompt: {prompt}"
     inputs = tokenizer(combined_input, return_tensors="pt").to(device)
-    outputs = model.generate(**inputs, max_new_tokens=200)
-    response = tokenizer.decode(outputs[0], skip_special_tokens=True)
     
+    # First query
+    outputs = model.generate(
+        **inputs, 
+        max_new_tokens=200,
+        return_dict_in_generate=True,
+        output_scores=True,
+        temperature=0.7,  # Add temperature parameter
+        do_sample=True    # Enable sampling
+    )
+    response1 = tokenizer.decode(outputs.sequences[0], skip_special_tokens=True)
+    result1 = parse_response(response1)
+    
+    # If first answer is "yes", prompt again
+    if result1["score"] == 1:
+        # Run second query with same prompt
+        outputs2 = model.generate(
+            **inputs, 
+            max_new_tokens=200,
+            return_dict_in_generate=True,
+            output_scores=True,
+            temperature=0.7,  # Add temperature parameter
+            do_sample=True    # Enable sampling
+        )
+        response2 = tokenizer.decode(outputs2.sequences[0], skip_special_tokens=True)
+        result2 = parse_response(response2)
+        
+        if result2["score"] == 1:
+            # Both answers are "yes", confirm the result
+            return {
+                "score": 1,
+                "reasoning": f"Confirmed 'Yes' in both queries. Reasoning: {result1['reasoning']}"
+            }
+        elif result2["score"] == 0:
+            # We have conflicting answers (Yes and No), compare confidence scores
+            # Calculate average logit score as a confidence measure
+            confidence1 = sum([score.max().item() for score in outputs.scores]) / len(outputs.scores)
+            confidence2 = sum([score.max().item() for score in outputs2.scores]) / len(outputs2.scores)
+            
+            if confidence1 > confidence2:
+                return {
+                    "score": 1,
+                    "reasoning": f"Selected first answer (Yes) based on higher confidence. Reasoning: {result1['reasoning']}"
+                }
+            else:
+                return {
+                    "score": 0,
+                    "reasoning": f"Selected second answer (No) based on higher confidence. Reasoning: {result2['reasoning']}"
+                }
+        else:
+            # First is "yes", second is neutral, keep original yes
+            return result1
+    else:
+        # First answer is not "yes", return original result
+        return result1
+
+def parse_response(response):
     try:        
         # Extract the second "Answer: "
         answer_parts = response.split("Answer: ")
